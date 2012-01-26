@@ -16,5 +16,12 @@
 
 <h3>Installation</h3>
 <p>
-  TODO.
+  Installing Stack Mobile is very simply once you have verified that your server meets the requirements listed above.
+  <ol>
+    <li>Download the latest version of Stack Mobile and Stack.PHP.</li>
+    <li>Extract the Stack Mobile archive to a folder within your document root.</li>
+    <li>Extract the <code>src</code> folder from the Stack.PHP archive to the Stack Mobile folder.</li>
+    <li>Rename the <code>src</code> folder to <code>stackphp</code>.</li>
+    <li>Open up your browser and point it to the directory containing the Stack Mobile code and follow the instructions.</li>
+  </ol>
 </p>
