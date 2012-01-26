@@ -54,6 +54,9 @@ if($version[0] < '5' ||
 if(!extension_loaded('pdo'))
     $general_errors[] = 'Error: the PDO extension is not loaded.';
 
+if(!is_dir('../stackphp'))
+    $general_errors[] = 'The directory "stackphp" does not exist. Please make sure that Stack.PHP is installed in that directory.';
+
 // Generate the HTML for the fields
 $all_fields_provided = TRUE;
 $fields_html = array();
@@ -87,7 +90,7 @@ if($postback && $all_fields_provided && !count($general_errors))
         $pdo = new PDO($_POST['db_host'], $_POST['db_username'], $_POST['db_password']);
         
         // Now attempt to open the configuration file.
-        $file = @fopen('../config.php', 'w');
+        $file = @fopen('../config/config.php', 'w');
         
         if($file)
         {
@@ -106,7 +109,7 @@ if($postback && $all_fields_provided && !count($general_errors))
             exit;
         }
         else
-            $general_errors[] = 'Error: cannot open "config.php" for writing.';
+            $general_errors[] = 'Error: cannot open "config/config.php" for writing.';
     }
     catch(PDOException $e)
     {
