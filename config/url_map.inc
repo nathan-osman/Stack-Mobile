@@ -20,6 +20,9 @@ require 'internal/url_entry.php';
 
 $global_url_map = array(
     
+    // This rule deals with the default page
+    new URLEntry('{^$}', 'sites', 'index'),
+    
     // This rule deals with the pages/ URLs
     new URLEntry('{^pages/(\w+)$}', 'pages', '$1'),
     
