@@ -1,3 +1,5 @@
+<?php
+
 /* Stack Mobile - Bringing Stack Exchange Sites to Mobile Devices
    Copyright (C) 2012  Nathan Osman
 
@@ -14,8 +16,6 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-/* Used for site icons on the home page */
-.site-icon {
-    width: 24px !important;
-    height: 24px !important;
-}
+echo "Stats for {$site_data['site']['name']}.";
+
+?>
