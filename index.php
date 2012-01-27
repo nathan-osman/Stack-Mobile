@@ -29,6 +29,16 @@ class StackMobile
     private $action;
     private $parameters;
     
+    /// Ensures that all requirements are met for displaying the page.
+    private function CheckRequirements()
+    {
+        if(!is_file('config/config.php'))
+            throw new Exception('The file "config.php" is missing. If you haven\'t run the installer yet, click <a href="install/">here</a>.');
+        
+        if(is_dir('install'))
+            throw new Exception('The "install" directory needs to be renamed or removed.');
+    }
+    
     /// Parses the path and passes it to the URL Manager for routing.
     private function ParsePath()
     {
@@ -154,6 +164,9 @@ class StackMobile
         // try to display an error page.
         try
         {
+            // Ensure the requirements are met
+            $this->CheckRequirements();
+            
             // Initialize the path
             $this->ParsePath();
             
