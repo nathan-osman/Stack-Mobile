@@ -16,32 +16,35 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+// Generate the URL prefix for content on the site
+$url_prefix = ViewUtils::GetDocumentRoot() . '/' . $site['site']['api_site_parameter'];
+
 ?>
 <table style='width: 100%;'>
   <tr>
     <td>
-      <img src='<?php echo $site_data['site']['icon_url']; ?>' class='site-logo' />
+      <img src='<?php echo $site['site']['icon_url']; ?>' class='site-logo' />
     </td>
     <td>
-      <h2><?php echo $site_data['site']['name']; ?></h2>
-      <p>Site for <?php echo $site_data['site']['audience']; ?></p>
+      <h2><?php echo $site['site']['name']; ?></h2>
+      <p>Site for <?php echo $site['site']['audience']; ?></p>
     </td>
   </tr>
 </table>
 
 <ul data-role='listview' data-inset='true'>
-  <li><a href='#'>Questions</a></li>
-  <li><a href='#'>Users</a></li>
-  <li><a href='#'>Tags</a></li>
-  <li data-icon='search'><a href='#'>Search</a></li>
+  <li><a href='<?php echo $url_prefix; ?>/questions'>Questions</a></li>
+  <li><a href='<?php echo $url_prefix; ?>/users'>Users</a></li>
+  <li><a href='<?php echo $url_prefix; ?>/tags'>Tags</a></li>
+  <li data-icon='search'><a href='<?php echo ViewUtils::GetDocumentRoot(); ?>/search'>Search</a></li>
 </ul>
 
 <h2>Related Sites:</h2>
 <ul data-role='listview' data-inset='true'>
 <?php
 
-foreach($site_data['site']['related_sites'] as $site)
-    echo "<li>{$site['name']}</li>";
+foreach($site['site']['related_sites'] as $related_site)
+    echo "<li>{$related_site['name']}</li>";
 
 ?>
 </ul>
@@ -50,18 +53,18 @@ foreach($site_data['site']['related_sites'] as $site)
 <table class='stats'>
   <tr>
     <th>Total questions:</th>
-    <td><?php echo $site_data['total_questions']; ?></td>
+    <td><?php echo $site['total_questions']; ?></td>
   </tr>
   <tr>
     <th>Total answers:</th>
-    <td><?php echo $site_data['total_answers']; ?></td>
+    <td><?php echo $site['total_answers']; ?></td>
   </tr>
   <tr>
     <th>Total users:</th>
-    <td><?php echo $site_data['total_users']; ?></td>
+    <td><?php echo $site['total_users']; ?></td>
   </tr>
   <tr>
     <th>New active users:</th>
-    <td><?php echo $site_data['new_active_users']; ?></td>
+    <td><?php echo $site['new_active_users']; ?></td>
   </tr>
 </table>

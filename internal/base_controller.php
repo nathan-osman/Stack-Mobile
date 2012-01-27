@@ -19,11 +19,11 @@
 /// The base controller from which all other controllers must derive.
 class BaseController
 {
-    /// The model that corresponds with this controller.
-    protected $model = null;
-    
     /// Contains all of the variables that will be passed to the view.
     private $view_variables = array();
+    
+    /// Data for the current site
+    protected $site = null;
     
     /// Adds the specified variable to the list of view variables.
     /**
@@ -45,6 +45,19 @@ class BaseController
     public function GetViewVariables()
     {
         return $this->view_variables;
+    }
+    
+    /// Retrieves information from the provided site.
+    /**
+      * \param $site the API parameter for the site
+      *
+      * Note: the site data will be accessible in a protected variable
+      * named $site and will be exposed as a view variable under the same name.
+      */
+    protected function SetSite($site)
+    {
+        $this->site = API::Site($site)->Info()->Filter(new Filter('!-psgDAJo'))->Exec()->Fetch();
+        $this->SetViewVariable('site', $this->site);
     }
 }
 

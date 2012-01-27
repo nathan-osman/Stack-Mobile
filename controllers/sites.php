@@ -28,7 +28,7 @@ class SitesController extends BaseController
     
     public function stats($site)
     {
-        $this->SetViewVariable('site_data', API::Site($site)->Info()->Filter(new Filter('!-psgDAJo'))->Exec()->Fetch());
+        $this->SetSite($site);
     }
 }
 
