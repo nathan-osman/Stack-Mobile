@@ -49,15 +49,15 @@ $page_id = 'page_' . uniqid();
 </head>
 <body>
   <div data-role='page' id='<?php echo $page_id; ?>' data-add-back-btn='true'>
-    <div data-role="header" data-position='fixed'>
+    <div data-role='header' data-position='fixed'>
       <h1><?php echo $config['site_name']; ?></h1>
     </div>
-    <div data-role="content">
+    <div data-role='content'>
       <?php echo $page_contents; ?>
     </div>
-    <div data-role="footer">
-      <p style="text-align: center;">&copy; 2012 - Nathan Osman -
-        <a href="#">[About]</a>
+    <div data-role='footer'>
+      <p style='text-align: center;'>&copy; 2012 - Nathan Osman -
+        <a href='<?php echo ViewUtils::GetDocumentRoot(); ?>/pages/about'>[About]</a>
       </p>
     </div>
   </div>

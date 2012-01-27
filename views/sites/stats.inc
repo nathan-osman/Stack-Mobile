@@ -16,6 +16,52 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-echo "Stats for {$site_data['site']['name']}.";
+?>
+<table style='width: 100%;'>
+  <tr>
+    <td>
+      <img src='<?php echo $site_data['site']['icon_url']; ?>' class='site-logo' />
+    </td>
+    <td>
+      <h2><?php echo $site_data['site']['name']; ?></h2>
+      <p>Site for <?php echo $site_data['site']['audience']; ?></p>
+    </td>
+  </tr>
+</table>
+
+<ul data-role='listview' data-inset='true'>
+  <li><a href='#'>Questions</a></li>
+  <li><a href='#'>Users</a></li>
+  <li><a href='#'>Tags</a></li>
+  <li data-icon='search'><a href='#'>Search</a></li>
+</ul>
+
+<h2>Related Sites:</h2>
+<ul data-role='listview' data-inset='true'>
+<?php
+
+foreach($site_data['site']['related_sites'] as $site)
+    echo "<li>{$site['name']}</li>";
 
 ?>
+</ul>
+
+<h2>Site Information:</h2>
+<table class='stats'>
+  <tr>
+    <th>Total questions:</th>
+    <td><?php echo $site_data['total_questions']; ?></td>
+  </tr>
+  <tr>
+    <th>Total answers:</th>
+    <td><?php echo $site_data['total_answers']; ?></td>
+  </tr>
+  <tr>
+    <th>Total users:</th>
+    <td><?php echo $site_data['total_users']; ?></td>
+  </tr>
+  <tr>
+    <th>New active users:</th>
+    <td><?php echo $site_data['new_active_users']; ?></td>
+  </tr>
+</table>

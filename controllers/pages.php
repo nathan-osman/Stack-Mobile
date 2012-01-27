@@ -1,3 +1,5 @@
+<?php
+
 /* Stack Mobile - Bringing Stack Exchange Sites to Mobile Devices
    Copyright (C) 2012  Nathan Osman
 
@@ -14,30 +16,14 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-/* I hereby propose that this be made the default for
-   HTML <td> elements - I have no idea why it isn't :) */
- td {
-     vertical-align: top;
- }
+require_once 'internal/base_controller.php';
 
-/* Used for site icons on the home page */
-.site-icon {
-    width: 24px;
-    height: 24px;
+class PagesController extends BaseController
+{
+    public function about()
+    {
+        //...
+    }
 }
 
-/* Used for site logos on the stats page */
-.site-logo {
-    width: 128px;
-    height: 128px;
-}
-
-/* Used for the stats table */
-.stats {
-    margin: auto;
-    text-align: right;
-}
-
-.stats th, .stats td {
-    padding: 0px 10px;
-}
+?>
