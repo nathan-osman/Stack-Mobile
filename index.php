@@ -16,10 +16,12 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-// Load the various management classes
-require_once 'internal/url_manager.php';
+// Load the configuration settings
+require_once 'config/config.php';
 
-// Include view utilities
+// Load some of the internal classes
+require_once 'internal/base_controller.php';
+require_once 'internal/url_manager.php';
 require_once 'internal/view_utils.php';
 
 /// Provides the core functionality of the site.
@@ -105,7 +107,7 @@ class StackMobile
             throw new Exception("The class <code>$class_name</code> must derive from <code>BaseController</code>.");
         
         // Actually run the method
-        $ret = $controller->$method_name();
+        $ret = call_user_func_array(array($controller, $method_name), $this->parameters);
         
         // If a return value was specified, then redirect to that URL
         if($ret !== null)
@@ -142,6 +144,9 @@ class StackMobile
         // Now we need to import all of the variables in $view_variables into the local scope.
         foreach($view_variables as $key =>$value)
             $$key = $value;
+        
+        // Expose the global configuration settings
+        global $config;
         
         // Capture the view output
         ob_start();

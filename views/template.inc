@@ -25,15 +25,41 @@ else
 // Prepend this string
 $page_title = 'Stack Mobile' . $page_title;
 
+// Generate a unique ID for the current page.
+$page_id = 'page_' . uniqid();
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+  
+  <!-- Set the character-encoding and viewport -->
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  
+  <!-- Set the page title -->
   <title><?php echo $page_title; ?></title>
-  <link rel="stylesheet" type="text/css" href="<?php echo ViewUtils::GetStaticPath('css/style.css'); ?>">
+  
+  <!-- Include the jQuery Mobile files + our css modifications -->
+  <script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
+  <script type='text/javascript' src='http://code.jquery.com/mobile/latest/jquery.mobile.min.js'></script>
+  <link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/latest/jquery.mobile.min.css' />
+  
+  <link rel='stylesheet' type='text/css' href='<?php echo ViewUtils::GetStaticPath('css/style.css'); ?>'>
 </head>
 <body>
-  <!-- CONTENT GOES HERE -->
-  <?php echo $page_contents; ?>
+  <div data-role='page' id='<?php echo $page_id; ?>' data-add-back-btn='true'>
+    <div data-role="header" data-position='fixed'>
+      <h1><?php echo $config['site_name']; ?></h1>
+    </div>
+    <div data-role="content">
+      <?php echo $page_contents; ?>
+    </div>
+    <div data-role="footer">
+      <p style="text-align: center;">&copy; 2012 - Nathan Osman -
+        <a href="#">[About]</a>
+      </p>
+    </div>
+  </div>
 </body>
 </html>

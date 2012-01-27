@@ -17,10 +17,16 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 require_once 'internal/base_controller.php';
+require_once 'internal/api.php';
 
 class SitesController extends BaseController
 {
     public function index()
+    {
+        $this->SetViewVariable('response', API::Sites());
+    }
+    
+    public function stats($site)
     {
         //...
     }
