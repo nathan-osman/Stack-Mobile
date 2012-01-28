@@ -40,6 +40,16 @@ class ViewUtils
     {
         return self::GetDocumentRoot() . '/static/' . $filename;
     }
+    
+    /// Loads one of the utility classes.
+    /**
+      * \param $class_name the name of the class to load
+      */
+    public static function LoadUtil($class_name)
+    {
+        // Load the file containing the class
+        require_once "utils/$class_name.php";
+    }
 }
 
 ?>

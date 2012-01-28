@@ -29,6 +29,11 @@ class QuestionsController extends BaseController
         // Retrieve the current questions on the site
         $this->SetViewVariable('response', API::Site($site)->Questions()->Filter('!-psgAvQU')->Exec());
     }
+    
+    public function view($site)
+    {
+        $this->SetSite($site);
+    }
 }
 
 ?>

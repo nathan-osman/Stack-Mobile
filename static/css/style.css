@@ -41,3 +41,21 @@
 .stats th, .stats td {
     padding: 0px 10px;
 }
+
+/* Used for displaying questions in a list */
+.question {
+    padding: 0px 32px 0px 6px !important;
+}
+
+.question h3, .question p {
+    white-space: normal !important;
+}
+
+/* Used for displaying tags */
+.tag {
+    display: inline-block;
+    background-color: #ccc;
+    margin: 2px;
+    padding: 4px;
+    border-radius: 4px;
+}

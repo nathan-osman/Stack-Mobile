@@ -16,12 +16,4 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-// This view makes use of question lists - which we can generate
-// with the Post utility class.
-ViewUtils::LoadUtil('post');
-
 ?>
-<ul data-role="listview">
-  <li data-role="list-divider">Recent questions asked on <?php echo $site['site']['name']; ?></li>
-  <?php echo Post::GenerateQuestionList($site, $response); ?>
-</ul>
