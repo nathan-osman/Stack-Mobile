@@ -23,7 +23,7 @@ else
     $page_title = " - $page_title";
 
 // Prepend this string
-$page_title = 'Stack Mobile' . $page_title;
+$page_title = $config['site_name'] . $page_title;
 
 // Generate a unique ID for the current page.
 $page_id = 'page_' . uniqid();
