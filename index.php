@@ -17,7 +17,10 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 // Load the configuration settings
-require_once 'config/config.php';
+if(is_file('config/config.php'))
+    require_once 'config/config.php';
+else
+    $config['site_name'] = 'Internal Error';
 
 // Load some of the internal classes
 require_once 'internal/base_controller.php';

@@ -16,4 +16,30 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+require_once 'internal/base_controller.php';
+require_once 'internal/api.php';
+
+class UsersController extends BaseController
+{
+    public function index($site)
+    {
+        $this->SetSite($site);
+        
+        // Retrieve the user list for the site
+        $this->SetViewVariable('response', API::Site($site)->Users()->Exec());
+    }
+    
+    public function view($site, $id)
+    {
+        $this->SetSite($site);
+        
+        $user = API::Site($site)->Users($id)->Filter('!-psgDpsh')->Exec()->Fetch();
+        
+        if($user === FALSE)
+            throw new Exception("The user with ID #$id does not exist.");
+        
+        $this->SetViewVariable('user', $user);
+    }
+}
+
 ?>

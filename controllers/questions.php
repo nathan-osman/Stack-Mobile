@@ -23,16 +23,22 @@ class QuestionsController extends BaseController
 {
     public function index($site)
     {
-        // Set the current site
         $this->SetSite($site);
         
         // Retrieve the current questions on the site
         $this->SetViewVariable('response', API::Site($site)->Questions()->Filter('!-psgAvQU')->Exec());
     }
     
-    public function view($site)
+    public function view($site, $id)
     {
         $this->SetSite($site);
+        
+        $question = API::Site($site)->Questions($id)->Filter('!9SwWaHXWe')->Exec()->Fetch();
+        
+        if($question === FALSE)
+            throw new Exception("The question with ID #$id does not exist.");
+        
+        $this->SetViewVariable('question', $question);
     }
 }
 

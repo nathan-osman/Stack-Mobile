@@ -45,6 +45,15 @@ class Post
         
         return implode('', $questions_html);
     }
+    
+    // Generates a user box
+    public static function GenerateUserBox($site, $user)
+    {
+        // Generate the URL for the user's profile
+        $profile_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/users/{$user['user_id']}";
+        
+        return "<a href='$profile_url' data-role='button'>{$user['display_name']}</a>";
+    }
 }
 
 ?>

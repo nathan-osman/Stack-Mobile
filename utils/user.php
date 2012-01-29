@@ -18,6 +18,24 @@
 
 class User
 {
+    public static function GenerateUserList($site, $response)
+    {
+        $users_html = array();
+        
+        while($user = $response->Fetch(FALSE))
+        {
+            // Get the user's location
+            if(!isset($user['location']))
+                $user['location'] = '<span class="unknown">[unknown]</span>';
+            
+            // Generate the URL of their profile
+            $profile_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/users/{$user['user_id']}";
+            
+            $users_html[] = "<li><a href='$profile_url'><img src='{$user['profile_image']}&s=16' class='site-icon ui-li-icon' />{$user['display_name']}<p>{$user['location']}</p></a></li>";
+        }
+        
+        return implode('', $users_html);
+    }
 }
 
 ?>

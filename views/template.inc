@@ -22,7 +22,7 @@ if(!isset($page_title))
 else
     $page_title = " - $page_title";
 
-// Prepend this string
+// Prepend the site name if available
 $page_title = $config['site_name'] . $page_title;
 
 // Generate a unique ID for the current page.

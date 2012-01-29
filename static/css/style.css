@@ -59,3 +59,13 @@
     padding: 4px;
     border-radius: 4px;
 }
+
+/* Used to separate answers */
+.answer-separator {
+    margin: 0px -12px !important;
+}
+
+/* Used to indicate data that is unknown */
+.unknown {
+    color: #999;
+}

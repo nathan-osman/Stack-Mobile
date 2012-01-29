@@ -16,4 +16,32 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+ViewUtils::LoadUtil('post');
+
+?>
+<!-- Question body -->
+<ul data-role='listview'>
+  <li data-role='list-divider'><?php echo htmlentities($question['title']); ?></li>
+</ul><br />
+<div>
+  <?php echo $question['body']; ?>
+  <?php echo Post::GenerateUserBox($site, $question['owner']); ?>
+</div><br />
+
+<!-- Question answers -->
+<ul data-role='listview'>
+  <li data-role='list-divider'><?php echo $question['answer_count']; ?> answers:</li>
+</ul><br />
+<?php
+
+// Generate the HTML for each answer
+$answer_html = array();
+
+foreach($question['answers'] as $answer)
+{
+    $answer_html[] = '<div>' . $answer['body'] . Post::GenerateUserBox($site, $answer['owner']) . '</div>';
+}
+
+echo implode('<hr class="answer-separator" />', $answer_html);
+
 ?>
