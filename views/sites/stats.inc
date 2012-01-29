@@ -36,7 +36,7 @@ $url_prefix = ViewUtils::GetDocumentRoot() . '/' . $site['site']['api_site_param
   <li><a href='<?php echo $url_prefix; ?>/questions'>Questions</a></li>
   <li><a href='<?php echo $url_prefix; ?>/users'>Users</a></li>
   <li><a href='<?php echo $url_prefix; ?>/tags'>Tags</a></li>
-  <li data-icon='search'><a href='<?php echo ViewUtils::GetDocumentRoot(); ?>/search'>Search</a></li>
+  <li data-icon='search'><a href='<?php echo $url_prefix; ?>/search'>Search</a></li>
 </ul>
 
 <h2>Related Sites:</h2>
