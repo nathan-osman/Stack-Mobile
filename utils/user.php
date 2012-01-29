@@ -24,6 +24,9 @@ class User
         
         while($user = $response->Fetch(FALSE))
         {
+            // Determine if the user is a mod.
+            $mod = ($user['user_type'] == 'moderator')?' &diams;':'';
+            
             // Get the user's location
             if(!isset($user['location']))
                 $user['location'] = '<span class="unknown">[unknown]</span>';
@@ -31,7 +34,7 @@ class User
             // Generate the URL of their profile
             $profile_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/users/{$user['user_id']}";
             
-            $users_html[] = "<li><a href='$profile_url'><img src='{$user['profile_image']}&s=16' class='site-icon ui-li-icon' />{$user['display_name']}<p>{$user['location']}</p></a></li>";
+            $users_html[] = "<li><a href='$profile_url'><img src='{$user['profile_image']}&s=16' class='site-icon ui-li-icon' />{$user['display_name']}$mod<p>{$user['location']}</p></a></li>";
         }
         
         return implode('', $users_html);

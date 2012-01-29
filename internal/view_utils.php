@@ -22,6 +22,16 @@ require_once 'internal/url_manager.php';
 /// A set of utility methods for views.
 class ViewUtils
 {
+    /// Loads one of the utility classes.
+    /**
+      * \param $class_name the name of the class to load
+      */
+    public static function LoadUtil($class_name)
+    {
+        // Load the file containing the class
+        require_once "utils/$class_name.php";
+    }
+
     /// Returns the document root.
     /**
       * \return the document root
@@ -41,14 +51,16 @@ class ViewUtils
         return self::GetDocumentRoot() . '/static/' . $filename;
     }
     
-    /// Loads one of the utility classes.
+    /// Returns the value of the provided index or a default if none provided.
     /**
-      * \param $class_name the name of the class to load
+      * \param $variable an array
+      * \param $index an index into the array
+      * \param $default_value the default value to display
+      * \return the value to display
       */
-    public static function LoadUtil($class_name)
+    public static function GetIndexValue($variable, $index, $default_value='[unknown]')
     {
-        // Load the file containing the class
-        require_once "utils/$class_name.php";
+        return (isset($variable[$index]) && $variable[$index] != '')?$variable[$index]:"<span class='unknown'>$default_value</span>";
     }
 }
 

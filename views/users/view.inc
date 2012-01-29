@@ -17,3 +17,27 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 ?>
+<!-- Summary of information -->
+<ul data-role='listview'>
+  <li data-role='list-divider'>User <?php echo $user['display_name'] . (($user['user_type'] == 'moderator')?' &diams;':''); ?></li>
+</ul><br />
+<table>
+  <tr>
+    <td style='width: 68px;'>
+      <img src='<?php echo $user['profile_image']; ?>&s=64' />
+    </td>
+    <td>
+      <b>Location:</b> <?php echo ViewUtils::GetIndexValue($user, 'location'); ?><br />
+      <b>Age:</b> <?php echo ViewUtils::GetIndexValue($user, 'age'); ?><br />
+      <span class='reputation'><?php echo $user['reputation']; ?></span>
+    </td>
+  </tr>
+</table><br />
+
+<!-- About me -->
+<ul data-role='listview'>
+  <li data-role="list-divider">About <?php echo $user['display_name']; ?></li>
+</ul><br />
+<?php echo ViewUtils::GetIndexValue($user, 'about_me', '[empty]'); ?>
+
+<!-- The rest of the user's data -->

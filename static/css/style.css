@@ -69,3 +69,12 @@
 .unknown {
     color: #999;
 }
+
+/* Used to format reputation */
+.reputation {
+    display: block;
+    color: darkgreen;
+    font-weight: bold;
+    font-size: 14pt;
+    margin-top: 4px;
+}
