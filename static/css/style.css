@@ -63,6 +63,7 @@
 /* Used to display user's information in a block */
 .user-box {
     text-align: left;
+    margin: 5px 0px;
 }
 
 .user-box .ui-btn-inner {
@@ -78,6 +79,11 @@
     float: left;
     margin-top: 3px;
     margin-right: 6px;
+}
+
+/* Used to display answers */
+.post-content {
+    margin-bottom: 18px;
 }
 
 /* Used to separate answers */
@@ -97,4 +103,13 @@
     font-weight: bold;
     font-size: 14pt;
     margin-top: 4px;
+}
+
+/* Used for displaying inline post lists */
+.inline-post-list {
+    margin-top: 6px !important;
+}
+
+.inline-post-list li {
+    padding-bottom: 6px;
 }

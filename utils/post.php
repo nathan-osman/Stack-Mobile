@@ -22,7 +22,7 @@ require_once 'utils/number.php';
 class Post
 {
     // Generates a list of questions
-    public static function GenerateQuestionList($site, $response)
+    public static function GeneratePostList($site, $response)
     {
         $questions_html = array();
         
@@ -32,13 +32,18 @@ class Post
             $preview = strip_tags($question['body']);
             $preview = substr($preview, 0, 100) . ((strlen($preview) > 100)?'&hellip;':'');
             
-            // Generate the tags for the post
-            $tags_html = array();
-            
-            foreach($question['tags'] as $tag)
-                $tags_html[] = "<span class='tag'>$tag</span>";
-            
-            $tags_html = implode('', $tags_html);
+            // Generate the tags for the post if applicable
+            if(isset($question['tags']))
+            {
+                $tags_html = array();
+                
+                foreach($question['tags'] as $tag)
+                    $tags_html[] = "<span class='tag'>$tag</span>";
+                
+                $tags_html = implode('', $tags_html);
+            }
+            else
+                $tags_html = '';
             
             // Generate the URL for the question
             $question_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/questions/{$question['question_id']}";

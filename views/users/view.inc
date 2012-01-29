@@ -17,6 +17,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 ViewUtils::LoadUtil('number');
+ViewUtils::LoadUtil('post');
 
 ?>
 <!-- Summary of information -->
@@ -42,4 +43,32 @@ ViewUtils::LoadUtil('number');
 </ul><br />
 <?php echo ViewUtils::GetIndexValue($user, 'about_me', '[empty]'); ?>
 
-<!-- The rest of the user's data -->
+<!-- The user's top 5 questions -->
+<?php
+
+$total_questions = $questions->Total(FALSE);
+if($total_questions)
+{
+    $title = ($total_questions > 1)?"$total_questions questions":'question';
+    echo '<ul data-role="listview" class="inline-post-list">';
+    echo "<li data-role='list-divider'>Top $title</li>";
+    echo Post::GeneratePostList($site, $questions);
+    echo '</ul>';
+}
+
+?>
+
+<!-- The user's top 5 answers -->
+<?php
+
+$total_answers = $answers->Total(FALSE);
+if($total_answers)
+{
+    $title = ($total_answers > 1)?"$total_answers answers":'answer';
+    echo '<ul data-role="listview" class="inline-post-list">';
+    echo "<li data-role='list-divider'>Top $title</li>";
+    echo Post::GeneratePostList($site, $answers);
+    echo '</ul>';
+}
+
+?>

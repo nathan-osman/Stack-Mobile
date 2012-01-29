@@ -33,12 +33,21 @@ class UsersController extends BaseController
     {
         $this->SetSite($site);
         
+        // Fetch the user's profile
         $user = API::Site($site)->Users($id)->Filter('!-psgDpsh')->Exec()->Fetch();
         
         if($user === FALSE)
             throw new Exception("The user with ID #$id does not exist.");
         
-        $this->SetViewVariable('user', $user);
+        // Now fetch the user's top 5 questions
+        $questions = API::Site($site)->Users($id)->Questions()->Filter('!-psgAvQU')->Exec()->Pagesize(5);
+        
+        // ...and their top 5 answers
+        $answers = API::Site($site)->Users($id)->Answers()->Filter('!9SwXE.JQY')->Exec()->Pagesize(5);
+        
+        $this->SetViewVariable('user',      $user);
+        $this->SetViewVariable('questions', $questions);
+        $this->SetViewVariable('answers',   $answers);
     }
 }
 

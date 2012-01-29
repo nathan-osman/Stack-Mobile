@@ -21,9 +21,9 @@ require_once 'internal/api.php';
 
 class TagsController extends BaseController
 {
-    public function index()
+    public function index($site)
     {
-        //...
+        $this->SetSite($site);
     }
 }
 

@@ -21,5 +21,5 @@ ViewUtils::LoadUtil('post');
 ?>
 <ul data-role="listview">
   <li data-role="list-divider">Recent questions asked on <?php echo $site['site']['name']; ?></li>
-  <?php echo Post::GenerateQuestionList($site, $response); ?>
+  <?php echo Post::GeneratePostList($site, $response); ?>
 </ul>

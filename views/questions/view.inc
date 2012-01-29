@@ -21,11 +21,16 @@ ViewUtils::LoadUtil('post');
 ?>
 <!-- Question body -->
 <ul data-role='listview'>
-  <li data-role='list-divider'><?php echo htmlentities($question['title']); ?></li>
+  <li data-role='list-divider'><?php echo $question['title']; ?></li>
 </ul><br />
 <div>
-  <?php echo $question['body']; ?>
-  <?php echo Post::GenerateUserBox($site, $question['owner'], $question['creation_date']); ?>
+  <?php
+  
+  echo '<div class="post-body">' . $question['body'];
+  echo Post::GenerateUserBox($site, $question['owner'], $question['creation_date']);
+  echo '</div>';
+  
+  ?>
 </div><br />
 
 <!-- Question answers -->
@@ -40,7 +45,7 @@ if(isset($question['answers']))
     $answer_html = array();
     
     foreach($question['answers'] as $answer)
-        $answer_html[] = '<div>' . $answer['body'] . Post::GenerateUserBox($site, $answer['owner'], $answer['creation_date']) . '</div>';
+        $answer_html[] = '<div class="post-content">' . $answer['body'] . Post::GenerateUserBox($site, $answer['owner'], $answer['creation_date']) . '</div>';
     
     echo implode('<hr class="answer-separator" />', $answer_html);
 }
