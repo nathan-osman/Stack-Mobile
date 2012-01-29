@@ -25,7 +25,7 @@ ViewUtils::LoadUtil('post');
 </ul><br />
 <div>
   <?php echo $question['body']; ?>
-  <?php echo Post::GenerateUserBox($site, $question['owner']); ?>
+  <?php echo Post::GenerateUserBox($site, $question['owner'], $question['creation_date']); ?>
 </div><br />
 
 <!-- Question answers -->
@@ -34,14 +34,17 @@ ViewUtils::LoadUtil('post');
 </ul><br />
 <?php
 
-// Generate the HTML for each answer
-$answer_html = array();
-
-foreach($question['answers'] as $answer)
+if(isset($question['answers']))
 {
-    $answer_html[] = '<div>' . $answer['body'] . Post::GenerateUserBox($site, $answer['owner']) . '</div>';
+    // Generate the HTML for each answer
+    $answer_html = array();
+    
+    foreach($question['answers'] as $answer)
+        $answer_html[] = '<div>' . $answer['body'] . Post::GenerateUserBox($site, $answer['owner'], $answer['creation_date']) . '</div>';
+    
+    echo implode('<hr class="answer-separator" />', $answer_html);
 }
-
-echo implode('<hr class="answer-separator" />', $answer_html);
+else
+    echo '<span class="unknown">[no answers]</span>';
 
 ?>

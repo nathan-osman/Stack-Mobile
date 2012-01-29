@@ -28,8 +28,7 @@ class User
             $mod = ($user['user_type'] == 'moderator')?' &diams;':'';
             
             // Get the user's location
-            if(!isset($user['location']))
-                $user['location'] = '<span class="unknown">[unknown]</span>';
+            $user['location'] = ViewUtils::GetIndexValue($user, 'location');
             
             // Generate the URL of their profile
             $profile_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/users/{$user['user_id']}";

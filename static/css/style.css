@@ -60,6 +60,22 @@
     border-radius: 4px;
 }
 
+/* Used to display user's information in a block */
+.user-box {
+    text-align: left;
+}
+
+.user-box .reputation {
+    margin-top: 6px;
+    float: right;
+}
+
+.user-box img {
+    float: left;
+    margin-top: 4px;
+    margin-right: 6px;
+}
+
 /* Used to separate answers */
 .answer-separator {
     margin: 0px -12px !important;

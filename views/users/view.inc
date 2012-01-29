@@ -16,6 +16,8 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+ViewUtils::LoadUtil('number');
+
 ?>
 <!-- Summary of information -->
 <ul data-role='listview'>
@@ -29,7 +31,7 @@
     <td>
       <b>Location:</b> <?php echo ViewUtils::GetIndexValue($user, 'location'); ?><br />
       <b>Age:</b> <?php echo ViewUtils::GetIndexValue($user, 'age'); ?><br />
-      <span class='reputation'><?php echo $user['reputation']; ?></span>
+      <span class='reputation'><?php echo Number::FormatUnit($user['reputation']); ?></span>
     </td>
   </tr>
 </table><br />

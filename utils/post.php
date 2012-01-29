@@ -16,6 +16,9 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+require_once 'utils/date.php';
+require_once 'utils/number.php';
+
 class Post
 {
     // Generates a list of questions
@@ -47,12 +50,27 @@ class Post
     }
     
     // Generates a user box
-    public static function GenerateUserBox($site, $user)
+    public static function GenerateUserBox($site, $user, $timestamp)
     {
         // Generate the URL for the user's profile
         $profile_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/users/{$user['user_id']}";
         
-        return "<a href='$profile_url' data-role='button'>{$user['display_name']}</a>";
+        // Generate the reputation for the user
+        $reputation = '<span class="reputation">' . Number::FormatUnit($user['reputation']) . '</span>';
+        
+        // Generate the user's Gravatar
+        $gravatar = "<img src='{$user['profile_image']}&s=32' />";
+        
+        // Generate the date for the timestamp
+        $date = Date::RelativeTime($timestamp);
+        
+        return <<<EOD
+<a href='$profile_url' data-role='button' class='user-box'>
+  $reputation
+  $gravatar{$user['display_name']}<br />
+  $date
+</a>
+EOD;
     }
 }
 

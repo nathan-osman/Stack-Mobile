@@ -16,15 +16,14 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-class Number
+require_once 'stackphp/format.php';
+
+class Date
 {
-    // Formats a number like 1246 as 1.2k
-    public static function FormatUnit($number)
+    // Piggback on Format::RelativeTime from Stack.PHP
+    public static function RelativeTime($timestamp)
     {
-        if($number < 1000)
-            return $number;
-        elseif($number < 1000000)
-            return sprintf('%.1fk', ($number / 1000));
+        return Format::Apply($timestamp, Format::RelativeDate);
     }
 }
 
