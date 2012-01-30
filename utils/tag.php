@@ -16,25 +16,23 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-require 'internal/url_entry.php';
-
-$global_url_map = array(
-    
-    // This rule deals with the default page
-    new URLEntry('{^$}', 'sites', 'index'),
-    
-    // This rule deals with the pages/ URLs
-    new URLEntry('{^pages/(\w+)$}', 'pages', '$1'),
-    
-    // This rule deals with the [site]/ URLs
-    new URLEntry('{^([\w\.]+)/?$}', 'sites', 'stats', '$1'),
-    
-    // This rule deals with the [site]/[controller] URLs
-    new URLEntry('{^([\w\.]+)/(\w+)/?$}', '$2', 'index', '$1'),
-    
-    // This rule deals with the [site]/[controller]/[id_or_tag] URLs
-    new URLEntry('{^([\w\.]+)/(\w+)/([\w\-]+)/?$}', '$2', 'view', '$1/$3'),
-    
-);
+class Tag
+{
+    // Generates a list of tags
+    public static function GenerateTagList($site, $response)
+    {
+        $tags_html = array();
+        
+        while($tag = $response->Fetch(FALSE))
+        {
+            // Generate the URL for the tag page
+            $tag_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/tags/{$tag['name']}";
+            
+            $tags_html[] = "<li><a href='$tag_url'>{$tag['name']}</a></li>";
+        }
+        
+        return implode('', $tags_html);
+    }
+}
 
 ?>

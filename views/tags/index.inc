@@ -16,25 +16,10 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-require 'internal/url_entry.php';
-
-$global_url_map = array(
-    
-    // This rule deals with the default page
-    new URLEntry('{^$}', 'sites', 'index'),
-    
-    // This rule deals with the pages/ URLs
-    new URLEntry('{^pages/(\w+)$}', 'pages', '$1'),
-    
-    // This rule deals with the [site]/ URLs
-    new URLEntry('{^([\w\.]+)/?$}', 'sites', 'stats', '$1'),
-    
-    // This rule deals with the [site]/[controller] URLs
-    new URLEntry('{^([\w\.]+)/(\w+)/?$}', '$2', 'index', '$1'),
-    
-    // This rule deals with the [site]/[controller]/[id_or_tag] URLs
-    new URLEntry('{^([\w\.]+)/(\w+)/([\w\-]+)/?$}', '$2', 'view', '$1/$3'),
-    
-);
+ViewUtils::LoadUtil('tag');
 
 ?>
+<ul data-role="listview">
+  <li data-role="list-divider">Tags on <?php echo $site['site']['name']; ?></li>
+  <?php echo Tag::GenerateTagList($site, $response); ?>
+</ul>

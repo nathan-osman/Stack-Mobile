@@ -106,10 +106,6 @@
 }
 
 /* Used for displaying inline post lists */
-.inline-post-list {
-    margin-top: 6px !important;
-}
-
 .inline-post-list li {
     padding-bottom: 6px;
 }

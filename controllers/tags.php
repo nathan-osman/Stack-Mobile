@@ -24,6 +24,18 @@ class TagsController extends BaseController
     public function index($site)
     {
         $this->SetSite($site);
+        
+        // Fetch the first page of tags from the site
+        $this->SetViewVariable('response', API::Site($site)->Tags()->Exec());
+    }
+    
+    public function view($site, $tag)
+    {
+        $this->SetSite($site);
+        
+        // Attempt to retreive questions with the specified tag
+        $this->SetViewVariable('tag', $tag);
+        $this->SetViewVariable('response', API::Site($site)->Questions()->Tagged($tag)->Filter('!-psgAvQU')->Exec());
     }
 }
 

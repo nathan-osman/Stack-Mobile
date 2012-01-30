@@ -26,7 +26,7 @@ ViewUtils::LoadUtil('post');
 <div>
   <?php
   
-  echo '<div class="post-body">' . $question['body'];
+  echo '<div>' . $question['body'];
   echo Post::GenerateUserBox($site, $question['owner'], $question['creation_date']);
   echo '</div>';
   
@@ -34,9 +34,9 @@ ViewUtils::LoadUtil('post');
 </div><br />
 
 <!-- Question answers -->
-<ul data-role='listview'>
+<ul data-role='listview' class="inline-post-list">
   <li data-role='list-divider'><?php echo $question['answer_count']; ?> answers:</li>
-</ul><br />
+</ul>
 <?php
 
 if(isset($question['answers']))
