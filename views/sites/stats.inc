@@ -43,8 +43,22 @@ $url_prefix = ViewUtils::GetDocumentRoot() . '/' . $site['site']['api_site_param
 <ul data-role='listview' data-inset='true'>
 <?php
 
+// TODO: this code is UGLY!
 foreach($site['site']['related_sites'] as $related_site)
-    echo "<li>{$related_site['name']}</li>";
+{
+    // This is a bit of a hack but necessary since the API parameter
+    // for the Meta is not included in the request.
+    if($related_site['relation'] == 'meta')
+        echo '<li><a href=\'' . ViewUtils::GetDocumentRoot() . "/meta.{$site['site']['api_site_parameter']}'>{$related_site['name']}</a></li>";
+    // Same ugly hack as above only in reverse
+    elseif($related_site['relation'] == 'parent')
+        echo '<li><a href=\'' . ViewUtils::GetDocumentRoot() . '/' . str_replace('meta.', '', $site['site']['api_site_parameter']) . "'>{$related_site['name']}</a></li>";
+    // Just redirect to the chat page (mobile friendly, of course)
+    elseif($related_site['relation'] == 'chat')
+        echo "<li><a href='{$related_site['site_url']}'>{$related_site['name']}</a></li>";
+    else
+        echo "<li>{$related_site['name']}</li>";
+}
 
 ?>
 </ul>
