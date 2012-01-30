@@ -42,8 +42,8 @@ $page_id = 'page_' . uniqid();
   
   <!-- Include the jQuery Mobile files + our css modifications -->
   <script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
-  <script type='text/javascript' src='http://code.jquery.com/mobile/latest/jquery.mobile.min.js'></script>
-  <link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/latest/jquery.mobile.min.css' />
+  <script type='text/javascript' src='http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js'></script>
+  <link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css' />
   
   <link rel='stylesheet' type='text/css' href='<?php echo ViewUtils::GetStaticPath('css/style.css'); ?>'>
 </head>
