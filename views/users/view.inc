@@ -22,53 +22,47 @@ ViewUtils::LoadUtil('post');
 ?>
 <!-- Summary of information -->
 <ul data-role='listview'>
-  <li data-role='list-divider'>User <?php echo $user['display_name'] . (($user['user_type'] == 'moderator')?' &diams;':''); ?></li>
-</ul><br />
-<table>
-  <tr>
-    <td style='width: 68px;'>
-      <img src='<?php echo $user['profile_image']; ?>&s=64' />
-    </td>
-    <td>
-      <b>Location:</b> <?php echo ViewUtils::GetIndexValue($user, 'location'); ?><br />
-      <b>Age:</b> <?php echo ViewUtils::GetIndexValue($user, 'age'); ?><br />
-      <span class='reputation'><?php echo Number::FormatUnit($user['reputation']); ?></span>
-    </td>
-  </tr>
-</table><br />
-
-<!-- About me -->
-<ul data-role='listview'>
+  <li data-role='list-divider'>
+    User <?php echo $user['display_name'] . (($user['user_type'] == 'moderator')?' &diams;':''); ?>
+  </li>
+  <li>
+    <table>
+      <tr>
+        <td style='width: 68px;'>
+          <img src='<?php echo $user['profile_image']; ?>&s=64' />
+        </td>
+        <td>
+          <b>Location:</b> <?php echo ViewUtils::GetIndexValue($user, 'location'); ?><br />
+          <b>Age:</b> <?php echo ViewUtils::GetIndexValue($user, 'age'); ?><br />
+          <span class='reputation'><?php echo Number::FormatUnit($user['reputation']); ?></span>
+        </td>
+      </tr>
+    </table>
+  </li>
   <li data-role="list-divider">About <?php echo $user['display_name']; ?></li>
-</ul><br />
-<?php echo ViewUtils::GetIndexValue($user, 'about_me', '[empty]'); ?>
+  <li>
+    <div class='item-body'>
+      <?php echo ViewUtils::GetIndexValue($user, 'about_me', '[empty]'); ?>
+    </div>
+  </li>
+  <?php
 
-<!-- The user's top 5 questions -->
-<?php
-
-$total_questions = $questions->Total(FALSE);
-if($total_questions)
-{
-    $title = ($total_questions > 1)?"$total_questions questions":'question';
-    echo '<ul data-role="listview" class="inline-post-list">';
-    echo "<li data-role='list-divider'>Top $title</li>";
-    echo Post::GeneratePostList($site, $questions);
-    echo '</ul>';
-}
-
-?>
-
-<!-- The user's top 5 answers -->
-<?php
-
-$total_answers = $answers->Total(FALSE);
-if($total_answers)
-{
-    $title = ($total_answers > 1)?"$total_answers answers":'answer';
-    echo '<ul data-role="listview" class="inline-post-list">';
-    echo "<li data-role='list-divider'>Top $title</li>";
-    echo Post::GeneratePostList($site, $answers);
-    echo '</ul>';
-}
-
-?>
+  // Get the total number of questions and answers
+  $total_questions = $questions->Total(FALSE);
+  if($total_questions)
+  {
+      $title = ($total_questions > 1)?"$total_questions questions":'question';
+      echo "<li data-role='list-divider'>Top $title</li>";
+      echo Post::GeneratePostList($site, $questions);
+  }
+  
+  $total_answers   = $answers->Total(FALSE);
+  if($total_answers)
+  {
+      $title = ($total_answers > 1)?"$total_answers answers":'answer';
+      echo "<li data-role='list-divider'>Top $title</li>";
+      echo Post::GeneratePostList($site, $answers);
+  }
+  
+  ?>
+</ul>

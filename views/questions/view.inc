@@ -22,34 +22,27 @@ ViewUtils::LoadUtil('post');
 <!-- Question body -->
 <ul data-role='listview'>
   <li data-role='list-divider'><?php echo $question['title']; ?></li>
-</ul><br />
-<div>
   <?php
   
-  echo '<div>' . $question['body'];
+  echo '<li><div class="item-body">' . $question['body'];
   echo Post::GenerateUserBox($site, $question['owner'], $question['creation_date']);
-  echo '</div>';
+  echo '</div></li>';
   
+  // Question answers
+  echo "<li data-role='list-divider'>{$question['answer_count']} answers:</li>";
+  
+  if(isset($question['answers']))
+  {
+      // Generate the HTML for each answer
+      $answer_html = array();
+      
+      foreach($question['answers'] as $answer)
+          $answer_html[] = '<li><div class="item-body">' . $answer['body'] . Post::GenerateUserBox($site, $answer['owner'], $answer['creation_date']) . '</div></li>';
+      
+      echo implode('', $answer_html);
+  }
+  else
+      echo '<li><span class="unknown">[no answers]</span></li>';
+
   ?>
-</div><br />
-
-<!-- Question answers -->
-<ul data-role='listview' class="inline-post-list">
-  <li data-role='list-divider'><?php echo $question['answer_count']; ?> answers:</li>
 </ul>
-<?php
-
-if(isset($question['answers']))
-{
-    // Generate the HTML for each answer
-    $answer_html = array();
-    
-    foreach($question['answers'] as $answer)
-        $answer_html[] = '<div class="post-content">' . $answer['body'] . Post::GenerateUserBox($site, $answer['owner'], $answer['creation_date']) . '</div>';
-    
-    echo implode('<hr class="answer-separator" />', $answer_html);
-}
-else
-    echo '<span class="unknown">[no answers]</span>';
-
-?>
