@@ -16,26 +16,10 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-class Tag
-{
-    // Generates a list of tags
-    public static function GenerateTagList($site, $response)
-    {
-        $tags_html = array();
-        
-        while($tag = $response->Fetch(FALSE))
-        {
-            // Generate the URL for the tag page
-            $tag_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/tags/{$tag['name']}";
-            
-            $tags_html[] = "<li><a href='$tag_url'>{$tag['name']}</a></li>";
-        }
-        
-        if(count($tags_html))
-            return implode('', $tags_html);
-        else
-            return '<li><span class="unknown">[empty]</span></li>';
-    }
-}
+ViewUtils::LoadUtil('post');
 
 ?>
+<ul data-role="listview">
+  <li data-role="list-divider">Questions matching '<?php echo $q; ?>'</li>
+  <?php echo Post::GeneratePostList($site, $response); ?>
+</ul>

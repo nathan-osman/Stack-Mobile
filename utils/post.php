@@ -51,7 +51,10 @@ class Post
             $questions_html[] = "<li><a href='$question_url' class='question'><h3>{$question['title']}</h3><p>$preview</p><p>$tags_html</p></a></li>";
         }
         
-        return implode('', $questions_html);
+        if(count($questions_html))
+            return implode('', $questions_html);
+        else
+            return '<li><span class="unknown">[empty]</span></li>';
     }
     
     // Generates a user box

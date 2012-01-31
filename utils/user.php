@@ -36,7 +36,10 @@ class User
             $users_html[] = "<li><a href='$profile_url'><img src='{$user['profile_image']}&s=16' class='site-icon ui-li-icon' />{$user['display_name']}$mod<p>{$user['location']}</p></a></li>";
         }
         
-        return implode('', $users_html);
+        if(count($users_html))
+            return implode('', $users_html);
+        else
+            return '<li><span class="unknown">[empty]</span></li>';
     }
 }
 

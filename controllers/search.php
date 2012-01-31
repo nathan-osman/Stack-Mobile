@@ -31,6 +31,33 @@ class SearchController extends BaseController
         if(isset($_GET['q']) && isset($_GET['search_type']))
             return array($site, 'search', $_GET['search_type'], $_GET['q']);
     }
+    
+    public function questions($site, $q)
+    {
+        $this->SetSite($site);
+        
+        // Perform the search
+        $this->SetViewVariable('q', $q);
+        $this->SetViewVariable('response', API::Site($site)->Search($q)->Filter('!-psgAvQU')->Exec());
+    }
+    
+    public function users($site, $q)
+    {
+        $this->SetSite($site);
+        
+        // Filter tags by the search string
+        $this->SetViewVariable('q', $q);
+        $this->SetViewVariable('response', API::Site($site)->Users()->Inname($q)->Exec());
+    }
+    
+    public function tags($site, $q)
+    {
+        $this->SetSite($site);
+        
+        // Filter tags by the search string
+        $this->SetViewVariable('q', $q);
+        $this->SetViewVariable('response', API::Site($site)->Tags()->Inname($q)->Exec());
+    }
 }
 
 ?>
