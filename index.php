@@ -47,16 +47,7 @@ class StackMobile
     /// Parses the path and passes it to the URL Manager for routing.
     private function ParsePath()
     {
-        // Determine the requested URI - note that IIS has a
-        // bug whereby $_SERVER['REQUEST_URI'] is not set properly.
-        // In this case, we use $_GET['STACKMOBILE_ORIGINAL_URI'], which is set
-        // by the rewrite rule.
-        if(isset($_SERVER['REQUEST_URI']))
-        {
-            $document_root = substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/') + 1);
-            $requested_path = str_replace($document_root, '', $_SERVER['REQUEST_URI']);
-        }
-        elseif(isset($_GET['STACKMOBILE_ORIGINAL_URI']))
+        if(isset($_GET['STACKMOBILE_ORIGINAL_URI']))
             $requested_path = $_GET['STACKMOBILE_ORIGINAL_URI'];
         else
             throw new Exception('Unable to determine the original request URI.');
@@ -183,7 +174,8 @@ class StackMobile
             
             // As long as $view_variables isn't null, then
             // we display the view.
-            $this->DisplayView($view_variables);
+            if($view_variables !== null)
+                $this->DisplayView($view_variables);
         }
         catch(Exception $e)
         {

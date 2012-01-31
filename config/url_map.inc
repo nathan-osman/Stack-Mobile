@@ -35,6 +35,9 @@ $global_url_map = array(
     // This rule deals with the [site]/[controller]/[id_or_tag] URLs
     new URLEntry('{^([\w\.]+)/(\w+)/([\w\-]+)/?$}', '$2', 'view', '$1/$3'),
     
+    // This rule deals with
+    new URLEntry('{^([\w\.]+)/search/(questions|users|tags)/(.*)?$}', 'search', '$2', '$1/$3'),
+    
 );
 
 ?>

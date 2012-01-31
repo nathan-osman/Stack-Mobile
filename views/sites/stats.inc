@@ -43,19 +43,12 @@ $url_prefix = ViewUtils::GetDocumentRoot() . '/' . $site['site']['api_site_param
 <ul data-role='listview' data-inset='true'>
 <?php
 
-// TODO: this code is UGLY!
 foreach($site['site']['related_sites'] as $related_site)
 {
-    // This is a bit of a hack but necessary since the API parameter
-    // for the Meta is not included in the request.
-    if($related_site['relation'] == 'meta')
-        echo '<li><a href=\'' . ViewUtils::GetDocumentRoot() . "/meta.{$site['site']['api_site_parameter']}'>{$related_site['name']}</a></li>";
-    // Same ugly hack as above only in reverse
-    elseif($related_site['relation'] == 'parent')
-        echo '<li><a href=\'' . ViewUtils::GetDocumentRoot() . '/' . str_replace('meta.', '', $site['site']['api_site_parameter']) . "'>{$related_site['name']}</a></li>";
-    // Just redirect to the chat page (mobile friendly, of course)
+    if(isset($related_site['api_site_parameter']))
+        echo '<li><a href=\'' . ViewUtils::GetDocumentRoot() . "/{$related_site['api_site_parameter']}'>{$related_site['name']}</a></li>";
     elseif($related_site['relation'] == 'chat')
-        echo "<li><a href='{$related_site['site_url']}'>{$related_site['name']}</a></li>";
+        echo "<li><a href='{$related_site['site_url']}?mobile=true'>{$related_site['name']}</a></li>";
     else
         echo "<li>{$related_site['name']}</li>";
 }
@@ -67,18 +60,18 @@ foreach($site['site']['related_sites'] as $related_site)
 <table class='stats'>
   <tr>
     <th>Total questions:</th>
-    <td><?php echo $site['total_questions']; ?></td>
+    <td><?php echo number_format($site['total_questions']); ?></td>
   </tr>
   <tr>
     <th>Total answers:</th>
-    <td><?php echo $site['total_answers']; ?></td>
+    <td><?php echo number_format($site['total_answers']); ?></td>
   </tr>
   <tr>
     <th>Total users:</th>
-    <td><?php echo $site['total_users']; ?></td>
+    <td><?php echo number_format($site['total_users']); ?></td>
   </tr>
   <tr>
     <th>New active users:</th>
-    <td><?php echo $site['new_active_users']; ?></td>
+    <td><?php echo number_format($site['new_active_users']); ?></td>
   </tr>
 </table>

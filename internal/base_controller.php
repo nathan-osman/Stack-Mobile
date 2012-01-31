@@ -56,7 +56,7 @@ class BaseController
       */
     protected function SetSite($site)
     {
-        $this->site = API::Site($site)->Info()->Filter(new Filter('!-psgDAJo'))->Exec()->Fetch();
+        $this->site = API::Site($site)->Info()->Filter(new Filter('!-q8LLJA7'))->Exec()->Fetch();
         $this->SetViewVariable('site', $this->site);
     }
 }

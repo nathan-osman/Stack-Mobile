@@ -22,6 +22,6 @@
   
   RewriteEngine On
   RewriteCond $1 !^(?:static|install)(?:/.*)?$
-  RewriteRule ^(.*)$ index.php [QSA]
+  RewriteRule ^(.*)$ index.php?STACKMOBILE_ORIGINAL_URI=$1 [QSA]
   
 </IfModule>

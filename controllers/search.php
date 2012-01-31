@@ -19,11 +19,17 @@
 require_once 'internal/base_controller.php';
 require_once 'internal/api.php';
 
+require_once 'internal/view_utils.php';
+
 class SearchController extends BaseController
 {
-    public function index()
+    public function index($site)
     {
-        //...
+        $this->SetSite($site);
+        
+        // If the 'q' parameter was supplied, then redirect
+        if(isset($_GET['q']) && isset($_GET['search_type']))
+            return array($site, 'search', $_GET['search_type'], $_GET['q']);
     }
 }
 

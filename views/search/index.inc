@@ -17,3 +17,17 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 ?>
+<form method='get'>
+  <label for='q'>Search terms</label>
+  <input type='text' id='q' name='q' />
+  <fieldset data-role='controlgroup'>
+    <legend>Search type</legend>
+    <input type='radio' name='search_type' value='questions' id='questions' checked='checked' />
+    <label for='questions'>Questions</label>
+    <input type='radio' name='search_type' value='users' id='users' />
+    <label for='users'>Users</label>
+    <input type='radio' name='search_type' value='tags' id='tags' />
+    <label for='tags'>Tags</label>
+  </fieldset>
+  <input type='submit' value='Search' />
+</form>
