@@ -28,6 +28,9 @@ class Post
         
         while($question = $response->Fetch(FALSE))
         {
+            // Generate the question title
+            $title = $question['title'] . ((isset($question['closed_date']))?' [closed]':'');
+            
             // Generate the brief portion of the question shown
             $preview = strip_tags($question['body']);
             $preview = substr($preview, 0, 100) . ((strlen($preview) > 100)?'&hellip;':'');
@@ -48,7 +51,7 @@ class Post
             // Generate the URL for the question
             $question_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/questions/{$question['question_id']}";
             
-            $questions_html[] = "<li><a href='$question_url' class='question'><h3>{$question['title']}</h3><p>$preview</p><p>$tags_html</p></a></li>";
+            $questions_html[] = "<li><a href='$question_url' class='question'><h3>$title</h3><p>$preview</p><p>$tags_html</p></a></li>";
         }
         
         if(count($questions_html))

@@ -16,20 +16,29 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+ViewUtils::LoadUtil('date');
 ViewUtils::LoadUtil('post');
 
 ?>
 <!-- Question body -->
 <ul data-role='listview'>
-  <li data-role='list-divider'><?php echo $question['title']; ?></li>
+  <li data-role='list-divider'><?php echo $question['title'] . ((isset($question['closed_date']))?' [closed]':''); ?></li>
   <?php
   
-  echo '<li><div class="item-body">' . $question['body'];
+  echo '<li><div class="item-body">';
+  
+  // Determine if the question was closed or not
+  if(isset($question['closed_date']) && isset($question['closed_reason']))
+      echo '<blockquote><p><b>Closed ' . Date::RelativeTime($question['closed_date']) . "</b> - {$question['closed_reason']}</p></blockquote>";
+  
+  echo $question['body'];
   echo Post::GenerateUserBox($site, $question['owner'], $question['creation_date']);
+  
   echo '</div></li>';
   
   // Question answers
-  echo "<li data-role='list-divider'>{$question['answer_count']} answers:</li>";
+  $s = ($question['answer_count'] == 1)?'':'s';
+  echo "<li data-role='list-divider'>{$question['answer_count']} answer$s:</li>";
   
   if(isset($question['answers']))
   {

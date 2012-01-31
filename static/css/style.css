@@ -16,9 +16,18 @@
 
 /* I hereby propose that this be made the default for
    HTML <td> elements - I have no idea why it isn't :) */
- td {
-     vertical-align: top;
- }
+td {
+    vertical-align: top;
+}
+
+/* Used for displaying blockquotes */
+blockquote {
+    margin: 0px 0px 8px 0px;
+    padding: 2px 8px 2px 10px;
+    background-color: #ddd;
+    box-shadow: 2px 2px 4px #bbb;
+    border-radius: 8px;
+}
 
 /* Used for site icons on the home page */
 .site-icon {
@@ -88,6 +97,7 @@
 
 .user-box .reputation {
     margin-top: 4px;
+    margin-right: 4px;
     float: right;
 }
 
