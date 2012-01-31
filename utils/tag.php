@@ -26,7 +26,8 @@ class Tag
         while($tag = $response->Fetch(FALSE))
         {
             // Generate the URL for the tag page
-            $tag_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/tags/{$tag['name']}";
+            $escaped_tag = urlencode($tag['name']);
+            $tag_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/tags/$escaped_tag";
             
             $tags_html[] = "<li><a href='$tag_url'>{$tag['name']}</a></li>";
         }
