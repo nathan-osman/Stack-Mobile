@@ -23,12 +23,14 @@ class SitesController extends BaseController
 {
     public function index()
     {
+        $this->SetViewVariable('page_title', 'Stack Exchange Sites');
         $this->SetViewVariable('response', API::Sites());
     }
     
     public function stats($site)
     {
         $this->SetSite($site);
+        $this->SetViewVariable('page_title', $this->site['site']['name']);
     }
 }
 

@@ -24,6 +24,7 @@ class UsersController extends BaseController
     public function index($site)
     {
         $this->SetSite($site);
+        $this->SetViewVariable('page_title', 'Users on ' . $this->site['site']['name']);
         
         // Retrieve the user list for the site
         $this->SetViewVariable('response', API::Site($site)->Users()->Exec());
@@ -38,6 +39,8 @@ class UsersController extends BaseController
         
         if($user === FALSE)
             throw new Exception("The user with ID #$id does not exist.");
+        
+        $this->SetViewVariable('page_title', 'User ' . $user['display_name']);
         
         // Now fetch the user's top 5 questions
         $questions = API::Site($site)->Users($id)->Questions()->Filter('!-psgAvQU')->Exec()->Pagesize(5);

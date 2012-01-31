@@ -24,6 +24,7 @@ class QuestionsController extends BaseController
     public function index($site)
     {
         $this->SetSite($site);
+        $this->SetViewVariable('page_title', 'Recent Questions on ' . $this->site['site']['name']);
         
         // Retrieve the current questions on the site
         $this->SetViewVariable('response', API::Site($site)->Questions()->Filter('!-psgAvQU')->Exec());
@@ -38,6 +39,7 @@ class QuestionsController extends BaseController
         if($question === FALSE)
             throw new Exception("The question with ID #$id does not exist.");
         
+        $this->SetViewVariable('page_title', $question['title']);
         $this->SetViewVariable('question', $question);
     }
 }

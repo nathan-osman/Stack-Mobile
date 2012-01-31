@@ -16,13 +16,15 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+require_once 'config/config.php';
 require_once 'internal/base_controller.php';
 
 class PagesController extends BaseController
 {
     public function about()
     {
-        //...
+        global $config;
+        $this->SetViewVariable('page_title', 'About ' . $config['site_name']);
     }
 }
 

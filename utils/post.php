@@ -60,25 +60,27 @@ class Post
     // Generates a user box
     public static function GenerateUserBox($site, $user, $timestamp)
     {
-        // Generate the URL for the user's profile
-        $profile_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/users/{$user['user_id']}";
-        
-        // Generate the reputation for the user
-        $reputation = '<span class="reputation">' . Number::FormatUnit($user['reputation']) . '</span>';
-        
-        // Generate the user's Gravatar
-        $gravatar = "<img src='{$user['profile_image']}&s=32' />";
+        // Determine if the user exists or not
+        if($user['user_type'] == 'does_not_exist')
+        {
+            $opening_element = "<div data-role='button' class='ui-disabled user-box'>";
+            $closing_element = '</div>';
+            $reputation = '';
+            $gravatar = "<img src='http://www.gravatar.com/avatar/0?s=32&d=mm' />";
+        }
+        else
+        {
+            $profile_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/users/{$user['user_id']}";
+            $opening_element = "<a href='$profile_url' data-role='button' class='user-box'>";
+            $closing_element = '</a>';
+            $reputation = '<span class="reputation">' . Number::FormatUnit($user['reputation']) . '</span>';
+            $gravatar = "<img src='{$user['profile_image']}&s=32' />";
+        }
         
         // Generate the date for the timestamp
         $date = Date::RelativeTime($timestamp);
         
-        return <<<EOD
-<a href='$profile_url' data-role='button' class='user-box'>
-  $reputation
-  $gravatar{$user['display_name']}<br />
-  $date
-</a>
-EOD;
+        return "$opening_element$reputation$gravatar{$user['display_name']}<br />$date$closing_element";
     }
 }
 

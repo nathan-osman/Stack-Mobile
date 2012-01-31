@@ -64,6 +64,16 @@
 .item-body p {
     margin-top: 4px;
     white-space: normal !important;
+    overflow: visible !important;
+}
+
+.item-body ul, .item-body ol {
+    padding-left: 16px;
+}
+
+.item-body li {
+    font-weight: normal !important;
+    font-size: 12px;
 }
 
 /* Used to display user's information in a block */
