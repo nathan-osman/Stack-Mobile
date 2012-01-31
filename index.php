@@ -47,12 +47,10 @@ class StackMobile
     /// Parses the path and passes it to the URL Manager for routing.
     private function ParsePath()
     {
-        if(isset($_GET['STACKMOBILE_ORIGINAL_URI']))
-            $requested_path = $_GET['STACKMOBILE_ORIGINAL_URI'];
-        else
+        if(!isset($_GET['STACKMOBILE_ORIGINAL_URI']))
             throw new Exception('Unable to determine the original request URI.');
         
-        $url_entry = URLManager::MatchURLEntry($requested_path);
+        $url_entry = URLManager::MatchURLEntry($_GET['STACKMOBILE_ORIGINAL_URI']);
         
         // Check the return value to see if an entry matched
         if($url_entry !== FALSE)

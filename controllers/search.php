@@ -29,7 +29,7 @@ class SearchController extends BaseController
         
         // If the 'q' parameter was supplied, then redirect
         if(isset($_GET['q']) && isset($_GET['search_type']))
-            return array($site, 'search', $_GET['search_type'], $_GET['q']);
+            return array($site, 'search', $_GET['search_type'], urlencode($_GET['q']));
     }
     
     public function questions($site, $q)
