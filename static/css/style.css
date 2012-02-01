@@ -105,7 +105,7 @@ blockquote {
 /* Used to display user's information in a block */
 .user-box {
     text-align: left;
-    margin: 5px 0px;
+    margin: 5px 0px 10px;
 }
 
 .user-box .ui-btn-inner {
@@ -113,9 +113,11 @@ blockquote {
 }
 
 .user-box .reputation {
+    display: block;
     margin-top: 4px;
     margin-right: 4px;
     float: right;
+    font-size: 14pt;
 }
 
 .user-box img {
@@ -132,9 +134,26 @@ blockquote {
 
 /* Used to format reputation */
 .reputation {
-    display: block;
-    color: darkgreen;
+    color: #090;
     font-weight: bold;
-    font-size: 14pt;
-    margin-top: 4px;
+}
+
+/* Used to display comments on the site */
+.comment {
+    margin: 10px 0px 0px;
+}
+
+.comment div {
+    margin: 0px;
+}
+
+.comment ul {
+    padding: 0px;
+    margin: 0px !important;
+    display: none;
+}
+
+.comment li a {
+    white-space: normal !important;
+    overflow: visible !important;
 }

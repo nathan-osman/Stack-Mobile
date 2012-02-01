@@ -40,12 +40,15 @@ $page_id = 'page_' . uniqid();
   <!-- Set the page title -->
   <title><?php echo $page_title; ?></title>
   
-  <!-- Include the jQuery Mobile files + our css modifications -->
+  <!-- Include the jQuery Mobile files -->
   <script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
   <script type='text/javascript' src='http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js'></script>
   <link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css' />
   
+  <!-- Include our custom JS and CSS modifications -->
+  <script type='text/javascript' src='<?php echo ViewUtils::GetStaticPath('js/util.js'); ?>'></script>
   <link rel='stylesheet' type='text/css' href='<?php echo ViewUtils::GetStaticPath('css/style.css'); ?>'>
+  
 </head>
 <body>
   <div data-role='page' id='<?php echo $page_id; ?>' data-add-back-btn='true'>

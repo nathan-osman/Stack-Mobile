@@ -34,7 +34,7 @@ class QuestionsController extends BaseController
     {
         $this->SetSite($site);
         
-        $question = API::Site($site)->Questions($id)->Filter('!9SwWaHXWe')->Exec()->Fetch();
+        $question = API::Site($site)->Questions($id)->Filter('!-)dQB__A07Ku')->Exec()->Fetch();
         
         if($question === FALSE)
             throw new Exception("The question with ID #$id does not exist.");

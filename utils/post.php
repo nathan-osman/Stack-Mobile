@@ -94,6 +94,31 @@ class Post
         
         return "$opening_element$reputation$gravatar{$user['display_name']}<br />$date$closing_element";
     }
+    
+    // Generates a list of comments
+    public static function GenerateCommentButton($site, $comments, $post_id)
+    {
+        // Generate the comment HTML
+        $comments_html = "<ul id='comment_content_$post_id' data-role='listview' data-inset='true'>";
+        
+        foreach($comments as $comment)
+        {
+            if($comment['owner']['user_type'] == 'does_not_exist')
+                $comments_html .= '<li>' . strip_tags($comment['body']) . " - <b>{$comment['owner']['display_name']}</b></li>";
+            else
+            {
+                // Generate the URL for the comment
+                $comment_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/users/{$comment['owner']['user_id']}";
+                
+                $comments_html .= "<li><a href='$comment_url'>" . strip_tags($comment['body']) . " - <b>{$comment['owner']['display_name']} <span class='reputation'>" . Number::FormatUnit($comment['owner']['reputation']) . '</span></b></a></li>';
+            }
+        }
+        
+        $comments_html .= '</ul>';
+        
+        $s = (($count = count($comments)) == 1)?'':'s';
+        return "<div id='comment_$post_id' class='comment'><div data-role='button' id='comment_button_$post_id' onclick='ShowComments($post_id);'>Show $count comment$s</div>$comments_html</div>";
+    }
 }
 
 ?>

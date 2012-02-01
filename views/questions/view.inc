@@ -39,6 +39,10 @@ ViewUtils::LoadUtil('post');
   echo Post::GenerateTagList($site, $question['tags']);
   echo Post::GenerateUserBox($site, $question['owner'], $question['creation_date']);
   
+  // Display any comments if provided
+  if(isset($question['comments']))
+      echo Post::GenerateCommentButton($site, $question['comments'], $question['question_id']);
+  
   echo '</div></li>';
   
   // Question answers
@@ -47,13 +51,16 @@ ViewUtils::LoadUtil('post');
   
   if(isset($question['answers']))
   {
-      // Generate the HTML for each answer
-      $answer_html = array();
-      
       foreach($question['answers'] as $answer)
-          $answer_html[] = '<li><div class="item-body">' . $answer['body'] . Post::GenerateUserBox($site, $answer['owner'], $answer['creation_date']) . '</div></li>';
-      
-      echo implode('', $answer_html);
+      {
+          echo '<li><div class="item-body">' . Post::GenerateUserBox($site, $answer['owner'], $answer['creation_date']) . $answer['body'];
+          
+          // Display any comments if provided
+          if(isset($answer['comments']))
+              echo Post::GenerateCommentButton($site, $answer['comments'], $answer['answer_id']);
+          
+          echo '</div></li>';
+      }
   }
   else
       echo '<li><span class="unknown">[no answers]</span></li>';
