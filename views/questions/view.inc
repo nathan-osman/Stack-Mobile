@@ -27,11 +27,16 @@ ViewUtils::LoadUtil('post');
   
   echo '<li><div class="item-body">';
   
+  // Determine if the question was migrated
+  if(isset($question['migrated_from']))
+      echo '<blockquote><p><b>Migrated ' . Date::RelativeTime($question['migrated_from']['on_date']) . "</b> from {$question['migrated_from']['other_site']['name']}</p></blockquote>";
+  
   // Determine if the question was closed or not
   if(isset($question['closed_date']) && isset($question['closed_reason']))
       echo '<blockquote><p><b>Closed ' . Date::RelativeTime($question['closed_date']) . "</b> - {$question['closed_reason']}</p></blockquote>";
   
   echo $question['body'];
+  echo Post::GenerateTagList($site, $question['tags']);
   echo Post::GenerateUserBox($site, $question['owner'], $question['creation_date']);
   
   echo '</div></li>';

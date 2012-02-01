@@ -61,15 +61,32 @@ blockquote {
 }
 
 /* Used for displaying tags */
+.tag-list {
+    margin: 0px;
+    padding: 2px 0px;
+}
+
 .tag {
     display: inline-block;
     background-color: #ccc;
     margin: 2px;
-    padding: 4px;
+    padding: 2px 6px;
     border-radius: 4px;
+    color: #555 !important;
+    font-size: 10pt;
+    text-decoration: none;
+}
+
+/* Yes, this only ever does anything on a desktop browser */
+.tag:hover {
+    box-shadow: 0px 0px 6px #777;
 }
 
 /* Used for displaying posts or any 'body' element */
+.item-body {
+    font-weight: normal;
+}
+
 .item-body p {
     margin-top: 4px;
     white-space: normal !important;

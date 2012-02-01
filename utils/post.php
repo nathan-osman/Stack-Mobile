@@ -21,6 +21,22 @@ require_once 'utils/number.php';
 
 class Post
 {
+    // Generate a list of tags
+    public static function GenerateTagList($site, $tags)
+    {
+        $tags_html = array();
+        
+        foreach($tags as $tag)
+        {
+            // Generate the URL for the tag
+            $tag_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/tags/{$tag}";
+            
+            $tags_html[] = "<a href='$tag_url'class='tag'>$tag</a>";
+        }
+        
+        return '<p class="tag-list">' . implode('', $tags_html) . '</p>';
+    }
+    
     // Generates a list of questions
     public static function GeneratePostList($site, $response)
     {
@@ -37,21 +53,14 @@ class Post
             
             // Generate the tags for the post if applicable
             if(isset($question['tags']))
-            {
-                $tags_html = array();
-                
-                foreach($question['tags'] as $tag)
-                    $tags_html[] = "<span class='tag'>$tag</span>";
-                
-                $tags_html = implode('', $tags_html);
-            }
+                $tags_html = self::GenerateTagList($site, $question['tags']);
             else
                 $tags_html = '';
             
             // Generate the URL for the question
             $question_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/questions/{$question['question_id']}";
             
-            $questions_html[] = "<li><a href='$question_url' class='question'><h3>$title</h3><p>$preview</p><p>$tags_html</p></a></li>";
+            $questions_html[] = "<li><a href='$question_url' class='question'><h3>$title</h3><p>$preview</p></a>$tags_html</li>";
         }
         
         if(count($questions_html))
