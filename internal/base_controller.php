@@ -60,6 +60,9 @@ class BaseController
       */
     protected function SetPageInfo($title, $equiv_url=null, $site=null)
     {
+        // Expose the document root as a view variable
+        $this->SetViewVariable('document_root', URLManager::GetDocumentRoot());
+        
         // Provide the view with access to the current page URL
         $this->SetViewVariable('page_url', URLManager::$current_url);
         
@@ -71,8 +74,9 @@ class BaseController
             $this->site = API::Site($site)->Info()->Filter(new Filter('!-q8LLJA7'))->Exec()->Fetch();
             
             // Pass on the site name and API parameter to the views
-            $this->SetViewVariable('site_name', $this->site['site']['name']);
-            $this->SetViewVariable('site',      $this->site['site']['api_site_parameter']);
+            $this->SetViewVariable('site',        $this->site['site']['api_site_parameter']);
+            $this->SetViewVariable('site_name',   $this->site['site']['name']);
+            $this->SetViewVariable('site_prefix', URLManager::GetDocumentRoot() . '/' . $this->site['site']['api_site_parameter']);
             
             // Replace '{name}' in page title with the site name
             $title = str_replace('{name}', $this->site['site']['name'], $title);

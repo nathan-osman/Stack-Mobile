@@ -23,5 +23,5 @@ ViewUtils::LoadUtil('post');
   <li data-role="list-divider">
     Questions on <?php echo $site_name; ?> tagged with '<?php echo $tag; ?>'.
   </li>
-  <?php echo Post::GeneratePostList($site, $response); ?>
+  <?php echo Post::GeneratePostList($site_prefix, $response); ?>
 </ul>

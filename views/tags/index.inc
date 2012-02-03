@@ -21,5 +21,5 @@ ViewUtils::LoadUtil('tag');
 ?>
 <ul data-role="listview">
   <li data-role="list-divider">Tags on <?php echo $site_name; ?></li>
-  <?php echo Tag::GenerateTagList($site, $response); ?>
+  <?php echo Tag::GenerateTagList($site_prefix, $response); ?>
 </ul>

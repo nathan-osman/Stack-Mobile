@@ -46,8 +46,8 @@ $page_id = 'page_' . uniqid();
   <link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css' />
   
   <!-- Include our custom JS and CSS modifications -->
-  <script type='text/javascript' src='<?php echo ViewUtils::GetStaticPath('js/util.js'); ?>'></script>
-  <link rel='stylesheet' type='text/css' href='<?php echo ViewUtils::GetStaticPath('css/style.css'); ?>'>
+  <script type='text/javascript' src='<?php echo "$document_root/static/js/util.js"; ?>'></script>
+  <link rel='stylesheet' type='text/css' href='<?php echo "$document_root/static/css/style.css"; ?>'>
   
 </head>
 <body>
@@ -57,7 +57,7 @@ $page_id = 'page_' . uniqid();
       <?php
       
       if(!isset($dialog) && isset($page_url) && isset($equiv_url))
-          echo '<a href="' . ViewUtils::GetDocumentRoot() . '/pages/dialog?page_url=' . urlencode($page_url) . '&equiv_url=' . urlencode($equiv_url) . '" class="ui-btn-right" data-icon="gear" data-rel="dialog" data-transition="slidedown">Options</a>';
+          echo "<a href='$document_root/pages/dialog?page_url=" . urlencode($page_url) . '&equiv_url=' . urlencode($equiv_url) . '\' class="ui-btn-right" data-icon="gear" data-rel="dialog" data-transition="slidedown">Options</a>';
       
       ?>
     </div>
@@ -66,7 +66,7 @@ $page_id = 'page_' . uniqid();
     </div>
     <div data-role='footer'>
       <p style='text-align: center;'>&copy; 2012 - Nathan Osman -
-        <a href='<?php echo ViewUtils::GetDocumentRoot(); ?>/pages/about'>[About]</a>
+        <a href='<?php echo $document_root; ?>/pages/about'>[About]</a>
       </p>
     </div>
   </div>

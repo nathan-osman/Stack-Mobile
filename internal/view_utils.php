@@ -16,7 +16,6 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-// The URLManager provides us with the GetDocumentRoot method
 require_once 'internal/url_manager.php';
 
 /// A set of utility methods for views.
@@ -30,25 +29,6 @@ class ViewUtils
     {
         // Load the file containing the class
         require_once "utils/$class_name.php";
-    }
-
-    /// Returns the document root.
-    /**
-      * \return the document root
-      */
-    public static function GetDocumentRoot()
-    {
-        return URLManager::GetDocumentRoot();
-    }
-    
-    /// Returns the absolute path to a file in the static directory.
-    /**
-      * \param $filename the name of a file in the static directory
-      * \return the absolute path to the file
-      */
-    public static function GetStaticPath($filename)
-    {
-        return self::GetDocumentRoot() . '/static/' . $filename;
     }
     
     /// Returns the value of the provided index or a default if none provided.

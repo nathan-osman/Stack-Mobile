@@ -30,10 +30,10 @@
 </table>
 
 <ul data-role='listview' data-inset='true'>
-  <li><a href='<?php echo ViewUtils::GetDocumentRoot() . "/$site"; ?>/questions'>Questions</a></li>
-  <li><a href='<?php echo ViewUtils::GetDocumentRoot() . "/$site"; ?>/users'>Users</a></li>
-  <li><a href='<?php echo ViewUtils::GetDocumentRoot() . "/$site"; ?>/tags'>Tags</a></li>
-  <li data-icon='search'><a href='<?php echo ViewUtils::GetDocumentRoot() . "/$site"; ?>/search'>Search</a></li>
+  <li><a href='<?php echo "$document_root/$site"; ?>/questions'>Questions</a></li>
+  <li><a href='<?php echo "$document_root/$site"; ?>/users'>Users</a></li>
+  <li><a href='<?php echo "$document_root/$site"; ?>/tags'>Tags</a></li>
+  <li data-icon='search'><a href='<?php echo "$document_root/$site"; ?>/search'>Search</a></li>
 </ul>
 
 <h2>Related Sites:</h2>
@@ -43,7 +43,7 @@
 foreach($site_data['site']['related_sites'] as $related_site)
 {
     if(isset($related_site['api_site_parameter']))
-        echo '<li><a href=\'' . ViewUtils::GetDocumentRoot() . "/{$related_site['api_site_parameter']}'>{$related_site['name']}</a></li>";
+        echo "<li><a href='$document_root/{$related_site['api_site_parameter']}'>{$related_site['name']}</a></li>";
     elseif($related_site['relation'] == 'chat')
         echo "<li><a href='{$related_site['site_url']}?mobile=true'>{$related_site['name']}</a></li>";
     else

@@ -21,5 +21,5 @@ ViewUtils::LoadUtil('post');
 ?>
 <ul data-role="listview">
   <li data-role="list-divider">Questions matching '<?php echo $q; ?>'</li>
-  <?php echo Post::GeneratePostList($site, $response); ?>
+  <?php echo Post::GeneratePostList($site_prefix, $response); ?>
 </ul>

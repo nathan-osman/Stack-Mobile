@@ -18,22 +18,31 @@
 
 class User
 {
-    public static function GenerateUserList($site, $response)
+    // Generates the name of a user
+    public static function GenerateUsername($user)
+    {
+        $username = $user['display_name'];
+        
+        if($user['user_type'] == 'moderator')
+            $username .= ' &diams;';
+        
+        return $username;
+    }
+    
+    // Generates a list of users
+    public static function GenerateUserList($site_prefix, $response)
     {
         $users_html = array();
         
         while($user = $response->Fetch(FALSE))
         {
-            // Determine if the user is a mod.
-            $mod = ($user['user_type'] == 'moderator')?' &diams;':'';
-            
             // Get the user's location
             $user['location'] = ViewUtils::GetIndexValue($user, 'location');
             
             // Generate the URL of their profile
-            $profile_url = ViewUtils::GetDocumentRoot() . "/$site/users/{$user['user_id']}";
+            $profile_url = "$site_prefix/users/{$user['user_id']}";
             
-            $users_html[] = "<li><a href='$profile_url'><img src='{$user['profile_image']}&s=16' class='site-icon ui-li-icon' />{$user['display_name']}$mod<p>{$user['location']}</p></a></li>";
+            $users_html[] = "<li><a href='$profile_url'><img src='{$user['profile_image']}&s=16' class='site-icon ui-li-icon' />" . self::GenerateUsername($user) . "<p>{$user['location']}</p></a></li>";
         }
         
         if(count($users_html))

@@ -18,18 +18,34 @@
 
 require_once 'utils/date.php';
 require_once 'utils/number.php';
+require_once 'utils/user.php';
 
 class Post
 {
+    // Generates the title of a question
+    public static function GenerateQuestionTitle($question)
+    {
+        // Begin with the actual title of the question
+        $title = $question['title'];
+        
+        // Check for migration data
+        if(isset($question['migrated_to']))
+            $title .= ' [migrated]';
+        elseif(isset($question['closed_date']))
+            $title .= ' [closed]';
+        
+        return $title;
+    }
+    
     // Generate a list of tags
-    public static function GenerateTagList($site, $tags)
+    public static function GenerateTagList($site_prefix, $tags)
     {
         $tags_html = array();
         
         foreach($tags as $tag)
         {
             // Generate the URL for the tag
-            $tag_url = ViewUtils::GetDocumentRoot() . "/$site/tags/{$tag}";
+            $tag_url = "$site_prefix/tags/" . urlencode($tag);
             
             $tags_html[] = "<a href='$tag_url'class='tag'>$tag</a>";
         }
@@ -38,14 +54,14 @@ class Post
     }
     
     // Generates a list of questions
-    public static function GeneratePostList($site, $response)
+    public static function GeneratePostList($site_prefix, $response)
     {
         $questions_html = array();
         
         while($question = $response->Fetch(FALSE))
         {
             // Generate the question title
-            $title = $question['title'] . ((isset($question['closed_date']))?' [closed]':'');
+            $title = self::GenerateQuestionTitle($question);
             
             // Generate the brief portion of the question shown
             $preview = strip_tags($question['body']);
@@ -53,12 +69,12 @@ class Post
             
             // Generate the tags for the post if applicable
             if(isset($question['tags']))
-                $tags_html = self::GenerateTagList($site, $question['tags']);
+                $tags_html = self::GenerateTagList($site_prefix, $question['tags']);
             else
                 $tags_html = '';
             
             // Generate the URL for the question
-            $question_url = ViewUtils::GetDocumentRoot() . "/$site/questions/{$question['question_id']}";
+            $question_url = "$site_prefix/questions/{$question['question_id']}";
             
             $questions_html[] = "<li><a href='$question_url' class='question'><h3>$title</h3><p>$preview</p></a>$tags_html</li>";
         }
@@ -70,7 +86,7 @@ class Post
     }
     
     // Generates a user box
-    public static function GenerateUserBox($site, $user, $timestamp)
+    public static function GenerateUserBox($site_prefix, $user, $timestamp)
     {
         // Determine if the user exists or not
         if($user['user_type'] == 'does_not_exist')
@@ -82,7 +98,7 @@ class Post
         }
         else
         {
-            $profile_url = ViewUtils::GetDocumentRoot() . "/$site/users/{$user['user_id']}";
+            $profile_url = "$site_prefix/users/{$user['user_id']}";
             $opening_element = "<a href='$profile_url' data-role='button' class='user-box'>";
             $closing_element = '</a>';
             $reputation = '<span class="reputation">' . Number::FormatUnit($user['reputation']) . '</span>';
@@ -92,11 +108,11 @@ class Post
         // Generate the date for the timestamp
         $date = Date::RelativeTime($timestamp);
         
-        return "$opening_element$reputation$gravatar{$user['display_name']}<br />$date$closing_element";
+        return "$opening_element$reputation$gravatar" . User::GenerateUsername($user) . "<br />$date$closing_element";
     }
     
     // Generates a list of comments
-    public static function GenerateCommentButton($site, $comments, $post_id)
+    public static function GenerateCommentButton($site_prefix, $comments, $post_id)
     {
         // Generate the comment HTML
         $comments_html = "<ul id='comment_content_$post_id' data-role='listview' data-inset='true'>";
@@ -104,13 +120,13 @@ class Post
         foreach($comments as $comment)
         {
             if($comment['owner']['user_type'] == 'does_not_exist')
-                $comments_html .= '<li>' . strip_tags($comment['body']) . " - <b>{$comment['owner']['display_name']}</b></li>";
+                $comments_html .= '<li>' . strip_tags($comment['body']) . ' - <b>' . User::GenerateUsername($comment['owner']) . '</b></li>';
             else
             {
                 // Generate the URL for the comment
-                $comment_url = ViewUtils::GetDocumentRoot() . "/$site/users/{$comment['owner']['user_id']}";
+                $comment_url = "$site_prefix/users/{$comment['owner']['user_id']}";
                 
-                $comments_html .= "<li><a href='$comment_url'>" . strip_tags($comment['body']) . " - <b>{$comment['owner']['display_name']} <span class='reputation'>" . Number::FormatUnit($comment['owner']['reputation']) . '</span></b></a></li>';
+                $comments_html .= "<li><a href='$comment_url'>" . strip_tags($comment['body']) . ' - <b>' . User::GenerateUsername($comment['owner']) . ' <span class="reputation">' . Number::FormatUnit($comment['owner']['reputation']) . '</span></b></a></li>';
             }
         }
         

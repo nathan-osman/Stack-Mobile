@@ -22,26 +22,27 @@ ViewUtils::LoadUtil('post');
 ?>
 <!-- Question body -->
 <ul data-role='listview'>
-  <li data-role='list-divider'><?php echo $question['title'] . ((isset($question['closed_date']))?' [closed]':''); ?></li>
+  <li data-role='list-divider'><?php echo Post::GenerateQuestionTitle($question); ?></li>
   <?php
   
   echo '<li><div class="item-body">';
   
-  // Determine if the question was migrated
-  if(isset($question['migrated_from']))
+  // Determine if the question was migrated to / from a site
+  if(isset($question['migrated_to']))
+      echo '<blockquote><p><b>Migrated ' . Date::RelativeTime($question['migrated_to']['on_date']) . "</b> to {$question['migrated_to']['other_site']['name']}</p></blockquote>";
+  elseif(isset($question['migrated_from']))
       echo '<blockquote><p><b>Migrated ' . Date::RelativeTime($question['migrated_from']['on_date']) . "</b> from {$question['migrated_from']['other_site']['name']}</p></blockquote>";
-  
   // Determine if the question was closed or not
-  if(isset($question['closed_date']) && isset($question['closed_reason']))
+  elseif(isset($question['closed_date']) && isset($question['closed_reason']))
       echo '<blockquote><p><b>Closed ' . Date::RelativeTime($question['closed_date']) . "</b> - {$question['closed_reason']}</p></blockquote>";
   
   echo $question['body'];
-  echo Post::GenerateTagList($site, $question['tags']);
-  echo Post::GenerateUserBox($site, $question['owner'], $question['creation_date']);
+  echo Post::GenerateTagList($site_prefix, $question['tags']);
+  echo Post::GenerateUserBox($site_prefix, $question['owner'], $question['creation_date']);
   
   // Display any comments if provided
   if(isset($question['comments']))
-      echo Post::GenerateCommentButton($site, $question['comments'], $question['question_id']);
+      echo Post::GenerateCommentButton($site_prefix, $question['comments'], $question['question_id']);
   
   echo '</div></li>';
   
@@ -53,11 +54,11 @@ ViewUtils::LoadUtil('post');
   {
       foreach($question['answers'] as $answer)
       {
-          echo '<li><div class="item-body">' . Post::GenerateUserBox($site, $answer['owner'], $answer['creation_date']) . $answer['body'];
+          echo '<li><div class="item-body">' . Post::GenerateUserBox($site_prefix, $answer['owner'], $answer['creation_date']) . $answer['body'];
           
           // Display any comments if provided
           if(isset($answer['comments']))
-              echo Post::GenerateCommentButton($site, $answer['comments'], $answer['answer_id']);
+              echo Post::GenerateCommentButton($site_prefix, $answer['comments'], $answer['answer_id']);
           
           echo '</div></li>';
       }

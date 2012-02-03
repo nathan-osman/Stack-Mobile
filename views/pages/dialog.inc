@@ -18,7 +18,7 @@
 
 require_once 'config/config.php';
 
-echo '<a href="' . ViewUtils::GetDocumentRoot() . "/\" data-role='button'>{$config['site_name']} Home Page</a>";
+echo "<a href='$document_root/' data-role='button'>{$config['site_name']} Home Page</a>";
 echo "<a href='$equiv_url' data-role='button'>View Actual Page</a>";
 
 ?>

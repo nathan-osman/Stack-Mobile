@@ -18,12 +18,13 @@
 
 ViewUtils::LoadUtil('number');
 ViewUtils::LoadUtil('post');
+ViewUtils::LoadUtil('user');
 
 ?>
 <!-- Summary of information -->
 <ul data-role='listview'>
   <li data-role='list-divider'>
-    User <?php echo $user['display_name'] . (($user['user_type'] == 'moderator')?' &diams;':''); ?>
+    User <?php echo User::GenerateUsername($user); ?>
   </li>
   <li>
     <table>
@@ -53,7 +54,7 @@ ViewUtils::LoadUtil('post');
   {
       $title = ($total_questions > 1)?"$total_questions questions":'question';
       echo "<li data-role='list-divider'>Top $title</li>";
-      echo Post::GeneratePostList($site, $questions);
+      echo Post::GeneratePostList($site_prefix, $questions);
   }
   
   $total_answers   = $answers->Total(FALSE);
@@ -61,7 +62,7 @@ ViewUtils::LoadUtil('post');
   {
       $title = ($total_answers > 1)?"$total_answers answers":'answer';
       echo "<li data-role='list-divider'>Top $title</li>";
-      echo Post::GeneratePostList($site, $answers);
+      echo Post::GeneratePostList($site_prefix, $answers);
   }
   
   ?>

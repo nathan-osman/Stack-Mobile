@@ -21,5 +21,5 @@ ViewUtils::LoadUtil('user');
 ?>
 <ul data-role="listview">
   <li data-role="list-divider">Users matching '<?php echo $q; ?>'</li>
-  <?php echo User::GenerateUserList($site, $response); ?>
+  <?php echo User::GenerateUserList($site_prefix, $response); ?>
 </ul>
