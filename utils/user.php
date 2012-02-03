@@ -16,6 +16,8 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+require_once 'utils/number.php';
+
 class User
 {
     // Generates the name of a user
@@ -42,7 +44,7 @@ class User
             // Generate the URL of their profile
             $profile_url = "$site_prefix/users/{$user['user_id']}";
             
-            $users_html[] = "<li><a href='$profile_url'><img src='{$user['profile_image']}&s=16' class='site-icon ui-li-icon' />" . self::GenerateUsername($user) . "<p>{$user['location']}</p></a></li>";
+            $users_html[] = '<li><span class="ui-li-count">' . Number::FormatUnit($user['reputation']) . "</span><a href='$profile_url'><img src='{$user['profile_image']}&s=16' class='site-icon ui-li-icon' />" . self::GenerateUsername($user) . "<p>{$user['location']}</p></a></li>";
         }
         
         if(count($users_html))

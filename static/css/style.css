@@ -53,7 +53,7 @@ blockquote {
 
 /* Used for displaying questions in a list */
 .question {
-    padding: 0px 32px 0px 6px !important;
+    padding: 0px 46px 0px 6px !important;
 }
 
 .question h3, .question p {

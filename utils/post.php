@@ -76,7 +76,7 @@ class Post
             // Generate the URL for the question
             $question_url = "$site_prefix/questions/{$question['question_id']}";
             
-            $questions_html[] = "<li><a href='$question_url' class='question'><h3>$title</h3><p>$preview</p></a>$tags_html</li>";
+            $questions_html[] = '<li><span class="ui-li-count">' . Number::FormatUnit($question['answer_count']) . "</span><a href='$question_url' class='question'><h3>$title</h3><p>$preview</p></a>$tags_html</li>";
         }
         
         if(count($questions_html))
