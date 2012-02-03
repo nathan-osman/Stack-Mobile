@@ -54,6 +54,12 @@ $page_id = 'page_' . uniqid();
   <div data-role='page' id='<?php echo $page_id; ?>' data-add-back-btn='true'>
     <div data-role='header' data-position='fixed'>
       <h1><?php echo $config['site_name']; ?></h1>
+      <?php
+      
+      if(!isset($dialog) && isset($page_url) && isset($equiv_url))
+          echo '<a href="' . ViewUtils::GetDocumentRoot() . '/pages/dialog?page_url=' . urlencode($page_url) . '&equiv_url=' . urlencode($equiv_url) . '" class="ui-btn-right" data-icon="gear" data-rel="dialog" data-transition="slidedown">Options</a>';
+      
+      ?>
     </div>
     <div data-role='content'>
       <?php echo $page_contents; ?>

@@ -50,7 +50,8 @@ class StackMobile
         if(!isset($_GET['STACKMOBILE_ORIGINAL_URI']))
             throw new Exception('Unable to determine the original request URI.');
         
-        $url_entry = URLManager::MatchURLEntry($_GET['STACKMOBILE_ORIGINAL_URI']);
+        URLManager::$current_url = $_GET['STACKMOBILE_ORIGINAL_URI'];
+        $url_entry = URLManager::MatchURLEntry();
         
         // Check the return value to see if an entry matched
         if($url_entry !== FALSE)

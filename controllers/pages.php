@@ -24,7 +24,17 @@ class PagesController extends BaseController
     public function about()
     {
         global $config;
-        $this->SetViewVariable('page_title', 'About ' . $config['site_name']);
+        $this->SetPageInfo('About ' . $config['site_name']);
+    }
+    
+    public function dialog()
+    {
+        if(!isset($_GET['page_url']) || !isset($_GET['equiv_url']))
+            throw new Exception('"page_url" or "equiv_url" is missing from the request.');
+        
+        $this->SetViewVariable('dialog', TRUE);
+        $this->SetViewVariable('page_url', $_GET['page_url']);
+        $this->SetViewVariable('equiv_url', $_GET['equiv_url']);
     }
 }
 

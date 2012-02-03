@@ -25,8 +25,7 @@ class SearchController extends BaseController
 {
     public function index($site)
     {
-        $this->SetSite($site);
-        $this->SetViewVariable('page_title', 'Search ' . $this->site['site']['name']);
+        $this->SetPageInfo('Search {name}', '{url}/search', $site);
         
         // If the 'q' parameter was supplied, then redirect
         if(isset($_GET['q']) && isset($_GET['search_type']))
@@ -35,8 +34,7 @@ class SearchController extends BaseController
     
     public function questions($site, $q)
     {
-        $this->SetSite($site);
-        $this->SetViewVariable('page_title', 'Search Results for "' . htmlentities($q) . '"');
+        $this->SetPageInfo('Search Results for "' . htmlentities($q) . '"', '{url}/search?q=' . urlencode($q), $site);
         
         // Perform the search
         $this->SetViewVariable('q', $q);
@@ -45,8 +43,7 @@ class SearchController extends BaseController
     
     public function users($site, $q)
     {
-        $this->SetSite($site);
-        $this->SetViewVariable('page_title', 'Search Results for "' . htmlentities($q) . '"');
+        $this->SetPageInfo('Search Results for "' . htmlentities($q) . '"', '{url}/search?q=' . urlencode($q), $site);
         
         // Filter tags by the search string
         $this->SetViewVariable('q', $q);
@@ -55,8 +52,7 @@ class SearchController extends BaseController
     
     public function tags($site, $q)
     {
-        $this->SetSite($site);
-        $this->SetViewVariable('page_title', 'Search Results for "' . htmlentities($q) . '"');
+        $this->SetPageInfo('Search Results for "' . htmlentities($q) . '"', '{url}/search?q=' . urlencode($q), $site);
         
         // Filter tags by the search string
         $this->SetViewVariable('q', $q);

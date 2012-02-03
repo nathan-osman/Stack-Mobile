@@ -22,18 +22,19 @@ require 'config/url_map.inc';
 /// Provides methods for managing URLs.
 class URLManager
 {
-    /// Finds the URLEntry that matches the requested URL.
+    public static $current_url;
+    
+    /// Finds the URLEntry that matches the current URL.
     /**
-      * \param $url the URL to match against
       * \return the URLEntry if a match was found, otherwise FALSE
       */
-    public static function MatchURLEntry($url)
+    public static function MatchURLEntry()
     {
         global $global_url_map;
         
         // Check each entry (in order) for a match
         foreach($global_url_map as $entry)
-            if($entry->Matches($url))
+            if($entry->Matches(self::$current_url))
                 return $entry;
         
         // If none found, return FALSE

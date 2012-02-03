@@ -16,10 +16,9 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-ViewUtils::LoadUtil('post');
+require_once 'config/config.php';
+
+echo '<a href="' . ViewUtils::GetDocumentRoot() . "/\" data-role='button'>{$config['site_name']} Home Page</a>";
+echo "<a href='$equiv_url' data-role='button'>View Actual Page</a>";
 
 ?>
-<ul data-role="listview">
-  <li data-role="list-divider">Recent questions asked on <?php echo $site_name; ?></li>
-  <?php echo Post::GeneratePostList($site, $response); ?>
-</ul>

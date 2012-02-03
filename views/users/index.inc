@@ -20,6 +20,6 @@ ViewUtils::LoadUtil('user');
 
 ?>
 <ul data-role="listview">
-  <li data-role="list-divider">Users on <?php echo $site['site']['name']; ?></li>
+  <li data-role="list-divider">Users on <?php echo $site_name; ?></li>
   <?php echo User::GenerateUserList($site, $response); ?>
 </ul>

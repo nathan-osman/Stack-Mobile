@@ -23,8 +23,7 @@ class TagsController extends BaseController
 {
     public function index($site)
     {
-        $this->SetSite($site);
-        $this->SetViewVariable('page_title', 'Tags on ' . $this->site['site']['name']);
+        $this->SetPageInfo('Tags on {name}', '{url}/tags', $site);
         
         // Fetch the first page of tags from the site
         $this->SetViewVariable('response', API::Site($site)->Tags()->Exec());
@@ -32,8 +31,7 @@ class TagsController extends BaseController
     
     public function view($site, $tag)
     {
-        $this->SetSite($site);
-        $this->SetViewVariable('page_title', 'Questions tagged "' . htmlentities($tag) . '"');
+        $this->SetPageInfo('Questions tagged "' . htmlentities($tag) . '"', '{url}/questions/tagged/' . urlencode($tag), $site);
         
         // Attempt to retreive questions with the specified tag
         $this->SetViewVariable('tag', $tag);

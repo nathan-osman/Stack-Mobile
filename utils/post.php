@@ -29,7 +29,7 @@ class Post
         foreach($tags as $tag)
         {
             // Generate the URL for the tag
-            $tag_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/tags/{$tag}";
+            $tag_url = ViewUtils::GetDocumentRoot() . "/$site/tags/{$tag}";
             
             $tags_html[] = "<a href='$tag_url'class='tag'>$tag</a>";
         }
@@ -58,7 +58,7 @@ class Post
                 $tags_html = '';
             
             // Generate the URL for the question
-            $question_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/questions/{$question['question_id']}";
+            $question_url = ViewUtils::GetDocumentRoot() . "/$site/questions/{$question['question_id']}";
             
             $questions_html[] = "<li><a href='$question_url' class='question'><h3>$title</h3><p>$preview</p></a>$tags_html</li>";
         }
@@ -82,7 +82,7 @@ class Post
         }
         else
         {
-            $profile_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/users/{$user['user_id']}";
+            $profile_url = ViewUtils::GetDocumentRoot() . "/$site/users/{$user['user_id']}";
             $opening_element = "<a href='$profile_url' data-role='button' class='user-box'>";
             $closing_element = '</a>';
             $reputation = '<span class="reputation">' . Number::FormatUnit($user['reputation']) . '</span>';
@@ -108,7 +108,7 @@ class Post
             else
             {
                 // Generate the URL for the comment
-                $comment_url = ViewUtils::GetDocumentRoot() . "/{$site['site']['api_site_parameter']}/users/{$comment['owner']['user_id']}";
+                $comment_url = ViewUtils::GetDocumentRoot() . "/$site/users/{$comment['owner']['user_id']}";
                 
                 $comments_html .= "<li><a href='$comment_url'>" . strip_tags($comment['body']) . " - <b>{$comment['owner']['display_name']} <span class='reputation'>" . Number::FormatUnit($comment['owner']['reputation']) . '</span></b></a></li>';
             }

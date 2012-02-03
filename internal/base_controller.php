@@ -16,6 +16,8 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+require_once 'internal/url_manager.php';
+
 /// The base controller from which all other controllers must derive.
 class BaseController
 {
@@ -47,17 +49,44 @@ class BaseController
         return $this->view_variables;
     }
     
-    /// Retrieves information from the provided site.
+    /// Sets the information for the page.
     /**
-      * \param $site the API parameter for the site
+      * \param $title the title for the page
+      * \param $equiv_url the equivalent URL on Stack Exchange
+      * \param $site the site for the current page
       *
-      * Note: the site data will be accessible in a protected variable
-      * named $site and will be exposed as a view variable under the same name.
+      * Note: it is important to call this method since it also sets a number of
+      * special view variables that the main template uses.
       */
-    protected function SetSite($site)
+    protected function SetPageInfo($title, $equiv_url=null, $site=null)
     {
-        $this->site = API::Site($site)->Info()->Filter(new Filter('!-q8LLJA7'))->Exec()->Fetch();
-        $this->SetViewVariable('site', $this->site);
+        // Provide the view with access to the current page URL
+        $this->SetViewVariable('page_url', URLManager::$current_url);
+        
+        // If the site is provided, include it in the view variables and substitute
+        // the information in some of the other fields.
+        if($site !== null)
+        {
+            // Retrieve the site information from the API
+            $this->site = API::Site($site)->Info()->Filter(new Filter('!-q8LLJA7'))->Exec()->Fetch();
+            
+            // Pass on the site name and API parameter to the views
+            $this->SetViewVariable('site_name', $this->site['site']['name']);
+            $this->SetViewVariable('site',      $this->site['site']['api_site_parameter']);
+            
+            // Replace '{name}' in page title with the site name
+            $title = str_replace('{name}', $this->site['site']['name'], $title);
+            
+            // Do the same for the page's equivalent URL
+            if($equiv_url !== null)
+            $equiv_url = str_replace('{url}', $this->site['site']['site_url'], $equiv_url);
+        }
+        
+        // Set the page title and equivalent URL
+        $this->SetViewVariable('page_title', $title);
+        
+        if($equiv_url !== null)
+            $this->SetViewVariable('equiv_url',  $equiv_url);
     }
 }
 

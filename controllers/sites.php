@@ -23,14 +23,16 @@ class SitesController extends BaseController
 {
     public function index()
     {
-        $this->SetViewVariable('page_title', 'Stack Exchange Sites');
+        $this->SetPageInfo('Stack Exchange Sites', 'http://stackexchange.com/sites');
         $this->SetViewVariable('response', API::Sites());
     }
     
     public function stats($site)
     {
-        $this->SetSite($site);
-        $this->SetViewVariable('page_title', $this->site['site']['name']);
+        $this->SetPageInfo('{name}', '{url}/', $site);
+        
+        // Provide the view with access to the site statistics
+        $this->SetViewVariable('site_data', $this->site);
     }
 }
 

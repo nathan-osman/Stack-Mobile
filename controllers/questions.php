@@ -23,8 +23,7 @@ class QuestionsController extends BaseController
 {
     public function index($site)
     {
-        $this->SetSite($site);
-        $this->SetViewVariable('page_title', 'Recent Questions on ' . $this->site['site']['name']);
+        $this->SetPageInfo('Recent Questions on {name}', '{url}/questions', $site);
         
         // Retrieve the current questions on the site
         $this->SetViewVariable('response', API::Site($site)->Questions()->Filter('!-psgAvQU')->Exec());
@@ -32,14 +31,14 @@ class QuestionsController extends BaseController
     
     public function view($site, $id)
     {
-        $this->SetSite($site);
-        
+        // Begin by attempting to retrieve the question with the specified ID
         $question = API::Site($site)->Questions($id)->Filter('!-)dQB__A07Ku')->Exec()->Fetch();
         
         if($question === FALSE)
             throw new Exception("The question with ID #$id does not exist.");
         
-        $this->SetViewVariable('page_title', $question['title']);
+        // Set the page information and question data
+        $this->SetPageInfo($question['title'], "{url}/q/$id", $site);
         $this->SetViewVariable('question', $question);
     }
 }
