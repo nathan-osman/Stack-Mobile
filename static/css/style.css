@@ -29,10 +29,21 @@ blockquote {
     border-radius: 8px;
 }
 
-/* Used for site icons on the home page */
-.site-icon {
+/* Used for the list of sites */
+.site-list a {
+    padding: 4px 28px 4px 36px !important;
+}
+
+.site-list a img {
     width: 24px;
     height: 24px;
+    top: 7px !important;
+    left: 6px !important;
+}
+
+.site-list a p {
+    margin-bottom: 0px !important;
+    white-space: normal !important;
 }
 
 /* Used for site logos on the stats page */
@@ -156,4 +167,32 @@ blockquote {
 .comment li a {
     white-space: normal !important;
     overflow: visible !important;
+}
+
+/* Used for page numbers */
+.page-numbers {
+    text-align: center;
+}
+
+.page-numbers span, .page-numbers a {
+    display: inline-block;
+    padding: 4px;
+    margin: 0px 2px;
+    border-radius: 8px;
+}
+
+.page-numbers span {
+    color: #fff;
+    background-color: #5E87B0;
+    text-shadow: 0px 1px 0px #000;
+}
+
+.page-numbers a {
+    color: #333 !important;
+    background-color: #ccc;
+    text-decoration: none;
+}
+
+.page-numbers a:hover {
+    background-color: #aaa;
 }

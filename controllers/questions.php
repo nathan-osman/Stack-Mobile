@@ -25,8 +25,12 @@ class QuestionsController extends BaseController
     {
         $this->SetPageInfo('Recent Questions on {name}', '{url}/questions', $site);
         
+        // Check for a page number
+        $page = $this->GetGETVariable('page', 1);
+        
         // Retrieve the current questions on the site
-        $this->SetViewVariable('response', API::Site($site)->Questions()->Filter('!-psgAvQU')->Exec());
+        $this->SetViewVariable('response', API::Site($site)->Questions()->Filter('!masJQxPJAU')->Exec()->Page($page));
+        $this->SetViewVariable('page',     $page);
     }
     
     public function view($site, $id)

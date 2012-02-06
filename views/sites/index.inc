@@ -21,13 +21,13 @@
   <li data-role="list-divider">Select a Stack Exchange site:</li>
 </ul>
 <br /><br />
-<ul data-role="listview" data-filter="true" data-filter-placeholder="Search for Stack Exchange Site...">
+<ul data-role="listview" data-filter="true" data-filter-placeholder="Search for Stack Exchange Site..." class='site-list'>
 <?php
 
 while($site = $response->Fetch(TRUE))
 {
     if($site['site_state'] != 'linked_meta')
-        echo "<li><a href='$document_root/{$site['api_site_parameter']}'><img src='{$site['icon_url']}' class='site-icon ui-li-icon' />{$site['name']}<p>for {$site['audience']}</p></a></li>";
+        echo "<li><a href='$document_root/{$site['api_site_parameter']}'><img src='{$site['icon_url']}' class='ui-li-icon' />{$site['name']}<p>for {$site['audience']}</p></a></li>";
 }
 
 ?>

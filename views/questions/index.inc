@@ -16,7 +16,11 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+ViewUtils::LoadUtil('page');
 ViewUtils::LoadUtil('post');
+
+Page::$page_url     = $page_url;
+Page::$current_page = $page;
 
 ?>
 <ul data-role="listview">

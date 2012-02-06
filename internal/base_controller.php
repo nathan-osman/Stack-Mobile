@@ -49,6 +49,12 @@ class BaseController
         return $this->view_variables;
     }
     
+    /// Retrieves the value of a GET variable.
+    public function GetGETVariable($name, $default)
+    {
+        return (isset($_GET[$name]))?$_GET[$name]:$default;
+    }
+    
     /// Sets the information for the page.
     /**
       * \param $title the title for the page

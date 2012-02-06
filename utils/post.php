@@ -18,6 +18,7 @@
 
 require_once 'utils/date.php';
 require_once 'utils/number.php';
+require_once 'utils/page.php';
 require_once 'utils/user.php';
 
 class Post
@@ -58,6 +59,10 @@ class Post
     {
         $questions_html = array();
         
+        // IF total > 30 then we display page numbers
+        if($response->Total() > 30)
+            $questions_html[] = Page::GeneratePageNumbers(ceil($response->Total() / 30));
+        
         while($question = $response->Fetch(FALSE))
         {
             // Generate the question title
@@ -76,7 +81,13 @@ class Post
             // Generate the URL for the question
             $question_url = "$site_prefix/questions/{$question['question_id']}";
             
-            $questions_html[] = '<li><span class="ui-li-count">' . Number::FormatUnit($question['answer_count']) . "</span><a href='$question_url' class='question'><h3>$title</h3><p>$preview</p></a>$tags_html</li>";
+            // Generate the content of the count bubble
+            if(isset($question['answer_count']))
+                $answer_bubble = Number::FormatUnit($question['answer_count']);
+            else
+                $answer_bubble = '';
+            
+            $questions_html[] = "<li><span class='ui-li-count'>$answer_bubble</span><a href='$question_url' class='question'><h3>$title</h3><p>$preview</p></a>$tags_html</li>";
         }
         
         if(count($questions_html))
