@@ -29,6 +29,8 @@ class PagesController extends BaseController
     
     public function dialog()
     {
+        $this->SetPageInfo('Options');
+        
         if(!isset($_GET['page_url']) || !isset($_GET['equiv_url']))
             throw new Exception('"page_url" or "equiv_url" is missing from the request.');
         

@@ -16,10 +16,14 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+ViewUtils::LoadUtil('page');
 ViewUtils::LoadUtil('user');
+
+Page::$page_url     = $page_url;
+Page::$current_page = $page;
 
 ?>
 <ul data-role="listview">
   <li data-role="list-divider">Users on <?php echo $site_name; ?></li>
-  <?php echo User::GenerateUserList($site_prefix, $response); ?>
+  <?php echo User::GenerateUserList($site_prefix, $response, TRUE); ?>
 </ul>

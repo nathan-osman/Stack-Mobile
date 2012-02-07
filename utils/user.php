@@ -17,6 +17,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 require_once 'utils/number.php';
+require_once 'utils/page.php';
 
 class User
 {
@@ -31,10 +32,14 @@ class User
         return $username;
     }
     
-    // Generates a list of users
-    public static function GenerateUserList($site_prefix, $response)
+    // Generates a list of users which can optionally be paginated
+    public static function GenerateUserList($site_prefix, $response, $paginate=FALSE)
     {
         $users_html = array();
+        
+        // IF total > 30 then we display page numbers
+        if($paginate && $response->Total(TRUE) > 30)
+            $users_html[] = Page::GeneratePageNumbers(ceil($response->Total() / 30));
         
         while($user = $response->Fetch(FALSE))
         {

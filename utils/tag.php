@@ -19,15 +19,19 @@
 class Tag
 {
     // Generates a list of tags
-    public static function GenerateTagList($site, $response)
+    public static function GenerateTagList($site_prefix, $response, $paginate=FALSE)
     {
         $tags_html = array();
+        
+        // IF total > 30 then we display page numbers
+        if($paginate && $response->Total(TRUE) > 30)
+            $tags_html[] = Page::GeneratePageNumbers(ceil($response->Total() / 30));
         
         while($tag = $response->Fetch(FALSE))
         {
             // Generate the URL for the tag page
             $escaped_tag = urlencode($tag['name']);
-            $tag_url = ViewUtils::GetDocumentRoot() . "/$site/tags/$escaped_tag";
+            $tag_url = "/$site_prefix/tags/$escaped_tag";
             
             $tags_html[] = "<li><a href='$tag_url'>{$tag['name']}</a></li>";
         }

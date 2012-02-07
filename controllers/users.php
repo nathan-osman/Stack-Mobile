@@ -25,8 +25,12 @@ class UsersController extends BaseController
     {
         $this->SetPageInfo('Users on {name}', '{url}/users', $site);
         
+        // Check for a page number
+        $page = $this->GetGETVariable('page', 1);
+        
         // Retrieve the user list for the site
-        $this->SetViewVariable('response', API::Site($site)->Users()->Exec());
+        $this->SetViewVariable('response', API::Site($site)->Users()->Filter('!-q2Rj6nE')->Exec()->Page($page));
+        $this->SetViewVariable('page',     $page);
     }
     
     public function view($site, $id)

@@ -25,8 +25,12 @@ class TagsController extends BaseController
     {
         $this->SetPageInfo('Tags on {name}', '{url}/tags', $site);
         
+        // Check for a page number
+        $page = $this->GetGETVariable('page', 1);
+        
         // Fetch the first page of tags from the site
-        $this->SetViewVariable('response', API::Site($site)->Tags()->Exec());
+        $this->SetViewVariable('response', API::Site($site)->Tags()->Exec()->Page($page));
+        $this->SetViewVariable('page',     $page);
     }
     
     public function view($site, $tag)

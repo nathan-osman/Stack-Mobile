@@ -54,13 +54,13 @@ class Post
         return '<p class="tag-list">' . implode('', $tags_html) . '</p>';
     }
     
-    // Generates a list of questions
-    public static function GeneratePostList($site_prefix, $response)
+    // Generates a list of questions that can be optionally paginated
+    public static function GeneratePostList($site_prefix, $response, $paginate=FALSE)
     {
         $questions_html = array();
         
         // IF total > 30 then we display page numbers
-        if($response->Total() > 30)
+        if($paginate && $response->Total(TRUE) > 30)
             $questions_html[] = Page::GeneratePageNumbers(ceil($response->Total() / 30));
         
         while($question = $response->Fetch(FALSE))
@@ -85,7 +85,7 @@ class Post
             if(isset($question['answer_count']))
                 $answer_bubble = Number::FormatUnit($question['answer_count']);
             else
-                $answer_bubble = '';
+                $answer_bubble = $question['score'];
             
             $questions_html[] = "<li><span class='ui-li-count'>$answer_bubble</span><a href='$question_url' class='question'><h3>$title</h3><p>$preview</p></a>$tags_html</li>";
         }

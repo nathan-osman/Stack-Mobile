@@ -180,10 +180,13 @@ class StackMobile
         {
             if($have_template)
             {
+                // Get the document root
+                $document_root = URLManager::GetDocumentRoot();
+                
                 // Display the default template file with the error
                 $page_contents  = '<h2>An Error Has Occurred</h2>';
                 $page_contents .= $e->getMessage();
-                $page_contents .= '<p>If you are seeing this error instead of the page you were looking for, try visiting the <a href="' . URLManager::GetDocumentRoot() . '/">home page</a>.</p>';
+                $page_contents .= "<p>If you are seeing this error instead of the page you were looking for, try visiting the <a href='$document_root'>home page</a>.</p>";
                 
                 global $config;
                 require 'views/template.inc';

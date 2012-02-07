@@ -25,5 +25,5 @@ Page::$current_page = $page;
 ?>
 <ul data-role="listview">
   <li data-role="list-divider">Recent questions asked on <?php echo $site_name; ?></li>
-  <?php echo Post::GeneratePostList($site_prefix, $response); ?>
+  <?php echo Post::GeneratePostList($site_prefix, $response, TRUE); ?>
 </ul>
