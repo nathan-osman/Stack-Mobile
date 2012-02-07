@@ -37,9 +37,13 @@ class TagsController extends BaseController
     {
         $this->SetPageInfo('Questions tagged "' . htmlentities($tag) . '"', '{url}/questions/tagged/' . urlencode($tag), $site);
         
+        // Check for a page number
+        $page = $this->GetGETVariable('page', 1);
+        
         // Attempt to retreive questions with the specified tag
         $this->SetViewVariable('tag', $tag);
-        $this->SetViewVariable('response', API::Site($site)->Questions()->Tagged($tag)->Filter('!-psgAvQU')->Exec());
+        $this->SetViewVariable('response', API::Site($site)->Questions()->Tagged($tag)->Filter('!-psgAvQU')->Exec()->Page($page));
+        $this->SetViewVariable('page',     $page);
     }
 }
 

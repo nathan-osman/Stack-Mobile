@@ -36,27 +36,39 @@ class SearchController extends BaseController
     {
         $this->SetPageInfo('Search Results for "' . htmlentities($q) . '"', '{url}/search?q=' . urlencode($q), $site);
         
+        // Check for a page number
+        $page = $this->GetGETVariable('page', 1);
+        
         // Perform the search
         $this->SetViewVariable('q', $q);
-        $this->SetViewVariable('response', API::Site($site)->Search($q)->Filter('!-psgAvQU')->Exec());
+        $this->SetViewVariable('response', API::Site($site)->Search($q)->Filter('!-psgAvQU')->Exec()->Page($page));
+        $this->SetViewVariable('page',     $page);
     }
     
     public function users($site, $q)
     {
         $this->SetPageInfo('Search Results for "' . htmlentities($q) . '"', '{url}/search?q=' . urlencode($q), $site);
         
+        // Check for a page number
+        $page = $this->GetGETVariable('page', 1);
+        
         // Filter tags by the search string
         $this->SetViewVariable('q', $q);
-        $this->SetViewVariable('response', API::Site($site)->Users()->Inname($q)->Exec());
+        $this->SetViewVariable('response', API::Site($site)->Users()->Inname($q)->Exec()->Page($page));
+        $this->SetViewVariable('page',     $page);
     }
     
     public function tags($site, $q)
     {
         $this->SetPageInfo('Search Results for "' . htmlentities($q) . '"', '{url}/search?q=' . urlencode($q), $site);
         
+        // Check for a page number
+        $page = $this->GetGETVariable('page', 1);
+        
         // Filter tags by the search string
         $this->SetViewVariable('q', $q);
-        $this->SetViewVariable('response', API::Site($site)->Tags()->Inname($q)->Exec());
+        $this->SetViewVariable('response', API::Site($site)->Tags()->Inname($q)->Exec()->Page($page));
+        $this->SetViewVariable('page',     $page);
     }
 }
 

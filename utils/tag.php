@@ -33,7 +33,7 @@ class Tag
             $escaped_tag = urlencode($tag['name']);
             $tag_url = "/$site_prefix/tags/$escaped_tag";
             
-            $tags_html[] = "<li><a href='$tag_url'>{$tag['name']}</a></li>";
+            $tags_html[] = "<li><a href='/$tag_url'>{$tag['name']}</a></li>";
         }
         
         if(count($tags_html))
