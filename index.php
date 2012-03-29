@@ -186,9 +186,11 @@ class StackMobile
                 // Display the default template file with the error
                 $page_contents  = '<h2>An Error Has Occurred</h2>';
                 $page_contents .= $e->getMessage();
-                $page_contents .= "<p>If you are seeing this error instead of the page you were looking for, try visiting the <a href='$document_root'>home page</a>.</p>";
+                $page_contents .= "<p>If you are seeing this error instead of the page you were looking for, try visiting the <a href='/$document_root'>home page</a>.</p>";
                 
                 global $config;
+                header("Status: 503 Server Error");
+                
                 require 'views/template.inc';
             }
             else

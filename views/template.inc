@@ -41,7 +41,7 @@ $page_id = 'page_' . uniqid();
   <title><?php echo $page_title; ?></title>
   
   <!-- Include the jQuery Mobile files -->
-  <script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
+  <script type='text/javascript' src='http://code.jquery.com/jquery-1.7.1.js'></script>
   <script type='text/javascript' src='http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js'></script>
   <link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css' />
   
