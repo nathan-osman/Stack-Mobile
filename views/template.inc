@@ -32,33 +32,33 @@ $page_id = 'page_' . uniqid();
 <!DOCTYPE html>
 <html>
 <head>
-  
+
   <!-- Set the character-encoding and viewport -->
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1'>
-  
+
   <!-- Set the page title -->
   <title><?php echo $page_title; ?></title>
-  
+
   <!-- Include the jQuery Mobile files -->
-  <script type='text/javascript' src='http://code.jquery.com/jquery-1.7.1.js'></script>
-  <script type='text/javascript' src='http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js'></script>
-  <link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css' />
-  
+  <script type='text/javascript' src='//code.jquery.com/jquery-1.7.1.js'></script>
+  <script type='text/javascript' src='//code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js'></script>
+  <link rel='stylesheet' type='text/css' href='//code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css' />
+
   <!-- Include our custom JS and CSS modifications -->
   <script type='text/javascript' src='<?php echo "$document_root/static/js/util.js"; ?>'></script>
   <link rel='stylesheet' type='text/css' href='<?php echo "$document_root/static/css/style.css"; ?>'>
-  
+
 </head>
 <body>
   <div data-role='page' id='<?php echo $page_id; ?>' data-add-back-btn='true'>
     <div data-role='header' data-position='fixed'>
       <h1><?php echo $config['site_name']; ?></h1>
       <?php
-      
+
       if(!isset($dialog) && isset($page_url) && isset($equiv_url))
           echo "<a href='$document_root/pages/dialog?page_url=" . urlencode($page_url) . '&equiv_url=' . urlencode($equiv_url) . '\' class="ui-btn-right" data-icon="gear" data-rel="dialog" data-transition="slidedown">Options</a>';
-      
+
       ?>
     </div>
     <div data-role='content'>
